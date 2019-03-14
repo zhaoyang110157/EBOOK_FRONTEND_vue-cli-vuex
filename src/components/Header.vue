@@ -3,7 +3,7 @@
         <nav class="navbar navbar-light">
             <router-link to="/Home">
                 <button type="button" class="btn btn-default btn-lg">
-
+                    <span class="iconfont icon-home"></span>
                 E-BOOK 在线书店
                 </button>
             </router-link>
@@ -11,6 +11,7 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/Books">
                         <button type="button" class="btn btn-default btn-lg">
+                            <span class="iconfont icon-xuexiao_kemu"></span>
                             Books
                         </button>
                     </router-link>
@@ -18,6 +19,7 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/Search">
                         <button type="button" class="btn btn-default btn-lg">
+                            <span class="iconfont icon-sousuo"></span>
                             Search
                         </button>
                     </router-link>
@@ -25,14 +27,15 @@
                 <li class="nav-item">
                     <router-link class="nav-link" to="/Orders">
                         <button type="button" class="btn btn-default btn-lg">
-                            Orders
+                            <span class="iconfont icon-project-copy"></span>
+                                    Orders
                         </button>
                     </router-link>
                 </li>
             </ul>
             <router-link to="/Log">
                 <button type="button" class="btn btn-default btn-lg">
-                <span class="glyphicon glyphicon-search" aria-hidden="false"></span>
+                    <span class="iconfont icon-gerenzhongxin-denglu"></span>
                     <span>登录/注册</span>
                 </button>
             </router-link>
@@ -48,7 +51,9 @@
 </script>
 
 <style scoped>
-    #lis{
-
+    .iconfont{
+        weight:50px;
+        height:50px;
+        float:left;
     }
 </style>
