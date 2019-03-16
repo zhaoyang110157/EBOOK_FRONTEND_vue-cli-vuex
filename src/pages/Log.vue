@@ -31,7 +31,7 @@
             <input type="password" class="form-control" v-model="SignUp.confirm_password" placeholder="Confirm Password" required autofocus>
             <label for="inputPassword" class="sr-only">E-mail</label>
             <input type="email"  class="form-control" v-model="SignUp.email" placeholder="E-mail" required autofocus >
-            <button class="btn btn-group-lg btn-primary btn-block" type="submit">Log up</button>
+            <button class="btn btn-group-lg btn-primary btn-block" type="submit" @click="url1">Log up</button>
             <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="submit" @click="up=!up">Back</button>
             <p class="mt-5 mb-3 text-muted"> © 上海交通大学 朱朝阳</p>
         </form>
@@ -60,6 +60,7 @@
         },
         methods:{
                 url1(){
+                    alert("SignIn.account");
 
                 }
             }

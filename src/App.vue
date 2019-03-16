@@ -3,6 +3,11 @@
         <Header/>
         <router-view/>
         <cart></cart>
+        <div id="but">
+            <a href="#">
+                <span class="iconfont icon-up">      </span>
+            </a>
+        </div>
     </div>
 </template>
 
@@ -46,5 +51,11 @@ export default {
         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
         border-radius: 0;
         background: rgba(0,0,0,0.1);
+    }
+
+    #but{
+        position:fixed;
+        bottom: 15px;
+        right:15px;
     }
 </style>

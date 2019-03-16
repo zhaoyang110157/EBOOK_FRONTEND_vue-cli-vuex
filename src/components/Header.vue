@@ -51,9 +51,4 @@
 </script>
 
 <style scoped>
-    .iconfont{
-        weight:50px;
-        height:50px;
-        float:left;
-    }
 </style>
