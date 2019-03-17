@@ -33,12 +33,19 @@
                     </router-link>
                 </li>
             </ul>
-            <router-link to="/Log">
+            <router-link v-if="login" to="/Log">
                 <button type="button" class="btn btn-default btn-lg">
                     <span class="iconfont icon-gerenzhongxin-denglu"></span>
                     <span>登录/注册</span>
                 </button>
             </router-link>
+            <router-link v-if="!login" to="/Users">
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="iconfont icon-lognin-person"></span>
+                    <span>用户中心</span>
+                </button>
+            </router-link>
+
         </nav>
     </div>
 
@@ -46,7 +53,8 @@
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        props:["login"]
     }
 </script>
 

@@ -16,7 +16,7 @@
             <hr>
 
 
-            <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit">Log in</button>
+            <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit" @click="url2">Log in</button>
             <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="submit" @click="up=!up">Log up</button>
             <p class="mt-5 mb-3 text-muted"> © 上海交通大学 朱朝阳</p>
         </form>
@@ -43,6 +43,7 @@
 <script>
     export default {
         name: "Log",
+        props:["login"],
         data(){
             return {
                 up:false,
@@ -60,8 +61,12 @@
         },
         methods:{
                 url1(){
-                    alert("SignIn.account");
-
+                    alert(this.SignUp.account);
+                    this.$emit(true);
+                    this.$router.push('/Books');
+                },
+                url2(){
+                    this.$router.push('/Books');
                 }
             }
     }

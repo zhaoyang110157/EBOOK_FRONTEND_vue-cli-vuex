@@ -34,7 +34,7 @@ export default new VueRouter ({
             component:Orders
         },
         {
-            path: '/users',
+            path: '/Users',
             component: Users
         },
         {
