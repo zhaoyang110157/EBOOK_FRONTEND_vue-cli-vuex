@@ -41,12 +41,11 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
         name: "Log",
-        props:["login"],
         data(){
             return {
-                up:false,
                 SignUp: {
                     account: '',
                     password: '',
@@ -62,10 +61,11 @@
         methods:{
                 url1(){
                     alert(this.SignUp.account);
-                    this.$emit(true);
+                    this.s.isLogin=true;
                     this.$router.push('/Books');
                 },
                 url2(){
+                    state.isLogin=true;
                     this.$router.push('/Books');
                 }
             }

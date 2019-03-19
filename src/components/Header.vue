@@ -32,29 +32,36 @@
                         </button>
                     </router-link>
                 </li>
+                <li class="nav-item" v-if="this.$route">
+                    <router-link class="nav-link" to="/Users">
+                        <button type="button" class="btn btn-default btn-lg">
+                            <span class="iconfont icon-manage"></span>
+                            Users
+                        </button>
+                    </router-link>
+                </li>
             </ul>
-            <router-link v-if="login" to="/Log">
-                <button type="button" class="btn btn-default btn-lg">
-                    <span class="iconfont icon-gerenzhongxin-denglu"></span>
-                    <span>登录/注册</span>
-                </button>
-            </router-link>
-            <router-link v-if="!login" to="/Users">
-                <button type="button" class="btn btn-default btn-lg">
-                    <span class="iconfont icon-lognin-person"></span>
-                    <span>用户中心</span>
-                </button>
-            </router-link>
-
+            <div>
+                <router-link v-if="false" to="/Log">
+                    <button type="button" class="btn btn-default btn-lg">
+                        <span class="iconfont icon-weidenglu"></span>
+                        <span>登录/注册</span>
+                    </button>
+                </router-link>
+                <router-link v-else to="/Users">
+                    <button type="button" class="btn btn-default btn-lg">
+                        <span class="iconfont icon-wode"></span>
+                        <span>用户中心</span>
+                    </button>
+                </router-link>
+            </div>
         </nav>
     </div>
-
 </template>
 
 <script>
     export default {
-        name: "Header",
-        props:["login"]
+        name: "Header"
     }
 </script>
 

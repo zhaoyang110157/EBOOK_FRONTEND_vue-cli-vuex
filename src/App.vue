@@ -1,7 +1,7 @@
 <template>
     <div id="app" >
         <Header v-bind:login="login"/>
-        <router-view v-bind:log="login" v-on:ListenToChildEvent="listen"/>
+        <router-view />
         <cart></cart>
         <div id="but">
             <a href="#">
@@ -16,18 +16,8 @@ import Header from  './components/Header.vue'
 import Cart from './components/Cart'
 export default {
     name:'app',
-    data(){
-      return {
-          login: true
-      };
-    },
     components:{
         Header,Cart
-    },
-    methods:{
-        listen:function (data) {
-            this.login=data;
-        }
     }
 }
 </script>
