@@ -40,12 +40,28 @@
                 </li>
             </ul>
             <div>
-                <router-link v-if="this.$store.state.Person.isLogin" to="/Log">
-                    <button type="button" class="btn btn-default btn-lg">
-                        <span class="iconfont icon-wode"></span>
-                        <span>用户中心</span>
-                    </button>
-                </router-link>
+                <div class="row mr-0" v-if="this.$store.state.Person.isLogin">
+                    <el-dropdown class="mr-3" style="cursor: pointer" trigger="click">
+                        <span class="el-dropdown-link">
+                            <i class="iconfont icon-guanliyuan text-primary" v-if="this.$store.state.Person.isManager">管理员</i>
+                            <i class="iconfont icon-wode text-primary" v-else>用户</i>
+                            <i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                                <div >
+                                    <span class="iconfont icon-tongji"></span>
+                                    统计
+                                </div>
+                            </el-dropdown-item>
+                            <el-dropdown-item >
+                                <div @click="signout">
+                                    <span class="iconfont icon-tuichu text-danger"></span>退出登录
+                                </div>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
                 <router-link v-else to="/Log">
                     <button type="button" class="btn btn-default btn-lg">
                     <span class="iconfont icon-weidenglu"></span>
@@ -59,7 +75,13 @@
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        methods:{
+            signout(){
+                this.$store.commit('Person/changeManage',false);
+                this.$store.commit('Person/changeLogin');
+            }
+        }
     }
 </script>
 

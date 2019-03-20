@@ -5,7 +5,7 @@
             <label for="inputEmail" class="sr-only">Account</label>
             <input type="text" id="inputEmail" class="form-control" placeholder="Account" v-model="SignIn.account" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="SignIn.password" required autofocus>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="SignIn.password"  required autofocus>
             <hr>
             <div class="checkbox mb-3">
                 <label>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+
     import {mapState} from 'vuex'
     export default {
         name: "Log",
@@ -59,39 +60,59 @@
         methods:{
             url1(){
                 for (let user of this.users) {
-                    if (this.SignIn.account === user.account && this.SignIn.password === user.password) {
-                        if (user.allowed){
-                            this.$store.commit('Person/changeLogin');
-                            break
+                    if (this.SignIn.account === user.account )
+                        if(this.SignIn.password === user.password) {
+                            if (user.allowed) {
+                                this.$store.commit('Person/changeLogin');
+                                if (user.role === "manager") this.$store.commit('Person/changeManager',true);
+                                this.$message.success('登陆成功');
+                                this.$router.push('/Home');
+                                break
+                            } else {
+                                this.$message.error('用户已被禁用');
+                                return false
+                            }
                         }
                         else {
-                            this.$message.error('用户已被禁用');
-                            return false
+                            this.$message.warning('错误的用户名或密码');
                         }
-                    }
                 }
             },
             url2(){
+                for (let user of this.users) {
+                    if (this.SignIn.account === user.account ){
+                        this.$message.warning('用户名已存在');
+                        return;
+                    }
+                }
+                if(this.SignUp.password !== this.SignUp.confirm_password)
+                {
+                    this.$message.warning('两次密码不相同');
+                    return;
+                }
                 alert(this.SignUp.account);
+                let user={
+                    account: this.SignIn.account,
+                    password: this.SignIn.password,
+                    allowed: true,
+                    role:'custom'
+                }
                 this.$store.commit('Person/changeLogin');
+                this.$store.commit('Person/addUser()',user);
                 this.$router.push('/Books');
             }
         },
         mounted() {
-                window.inClick = ()=>{
-                    this.url1();
-                    /*
-                    * 这里的this，指向的是Vue实例，并不是window，
-                    * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
-                    */
-                },
-                    window.upClick = ()=>{
-                    this.url2();
-                        /*
-                        * 这里的this，指向的是Vue实例，并不是window，
-                        * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
-                        */
-                    }
+            window.inClick = ()=>{
+                this.url1();
+                /*
+                   * 这里的this，指向的是Vue实例，并不是window，
+                   * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
+                   */
+            },
+                window.upClick = ()=>{
+                this.url2();
+            }
         },
         computed: {
             ...mapState({

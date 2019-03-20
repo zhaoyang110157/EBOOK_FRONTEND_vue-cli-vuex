@@ -2,8 +2,9 @@
     <div class="parallax-window" data-parallax="scroll" data-image-src="img/bg-img-05.jpg">
         <div>
             <span>书籍展览</span>
-            <button v-if="this.$store.state.isManager">添加书籍 </button>
+            <button class="btn btn-default btn-lg" v-if="this.$store.state.Person.isManager">添加书籍 </button>
         </div>
+        <Book></Book>
     </div>
 </template>
 
@@ -12,6 +13,7 @@
     export default {
         name: "Books",
         components:{
+            Book
         }
     }
 </script>

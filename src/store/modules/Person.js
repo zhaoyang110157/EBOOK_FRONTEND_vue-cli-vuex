@@ -24,8 +24,8 @@ const state ={
 };
 
 const mutations = {
-    changeManager (state) {
-        state.isManager = !state.isManager
+    changeManager (state,is) {
+        state.isManager = is;
     },
     changeLogin (state) {
         state.isLogin = !state.isLogin

@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style>
+
     body{
         background-image: url("assets/blank.jpg");
         margin: 0;
