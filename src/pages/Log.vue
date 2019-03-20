@@ -1,12 +1,11 @@
 <template>
     <div  id="t"  class="text-center">
-        <form class="form-signin" v-show="!up">
+        <form class="form-signin" v-show="!up" onsubmit="return inClick();">
             <h1 class="h3 mb-6 font-weight-bold">please sign in</h1>
             <label for="inputEmail" class="sr-only">Account</label>
             <input type="text" id="inputEmail" class="form-control" placeholder="Account" v-model="SignIn.account" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="SignIn.password" required autofocus>
-
             <hr>
             <div class="checkbox mb-3">
                 <label>
@@ -14,14 +13,12 @@
                 </label>
             </div>
             <hr>
-
-
-            <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit" @click="url2">Log in</button>
+            <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit">Log in</button>
             <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="submit" @click="up=!up">Log up</button>
             <p class="mt-5 mb-3 text-muted"> © 上海交通大学 朱朝阳</p>
         </form>
 
-        <form   v-show="up" class="form-signin">
+        <form   v-show="up" class="form-signin" onsubmit="return upClick();">
             <h1 class="h3 mb-6 font-weight-bold">please sign up</h1>
             <label for="inputEmail" class="sr-only">Account</label>
             <input type="text"  class="form-control" v-model="SignUp.account" placeholder="Account" required autofocus >
@@ -46,6 +43,7 @@
         name: "Log",
         data(){
             return {
+                up:false,
                 SignUp: {
                     account: '',
                     password: '',
@@ -59,16 +57,48 @@
             }
         },
         methods:{
-                url1(){
-                    alert(this.SignUp.account);
-                    this.s.isLogin=true;
-                    this.$router.push('/Books');
-                },
-                url2(){
-                    state.isLogin=true;
-                    this.$router.push('/Books');
+            url1(){
+                for (let user of this.users) {
+                    if (this.SignIn.account === user.account && this.SignIn.password === user.password) {
+                        if (user.allowed){
+                            this.$store.commit('Person/changeLogin');
+                            break
+                        }
+                        else {
+                            this.$message.error('用户已被禁用');
+                            return false
+                        }
+                    }
                 }
+            },
+            url2(){
+                alert(this.SignUp.account);
+                this.$store.commit('Person/changeLogin');
+                this.$router.push('/Books');
             }
+        },
+        mounted() {
+                window.inClick = ()=>{
+                    this.url1();
+                    /*
+                    * 这里的this，指向的是Vue实例，并不是window，
+                    * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
+                    */
+                },
+                    window.upClick = ()=>{
+                    this.url2();
+                        /*
+                        * 这里的this，指向的是Vue实例，并不是window，
+                        * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
+                        */
+                    }
+        },
+        computed: {
+            ...mapState({
+                users: state => state.Person.users,
+            }),
+        }
+
     }
 </script>
 

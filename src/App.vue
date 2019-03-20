@@ -1,11 +1,13 @@
 <template>
     <div id="app" >
-        <Header v-bind:login="login"/>
-        <router-view />
+        <Header/>
+        <router-view/>
         <cart></cart>
-        <div id="but">
+        <div id="but" class="bg-transparent">
             <a href="#">
-                <span class="iconfont icon-up">      </span>
+                <el-button type="warning"  plain circle>
+                    <span class="iconfont icon-up" ></span>
+                </el-button>
             </a>
         </div>
     </div>

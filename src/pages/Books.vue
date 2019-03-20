@@ -1,105 +1,17 @@
 <template>
     <div class="parallax-window" data-parallax="scroll" data-image-src="img/bg-img-05.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="tm-img-container">
-
-                    <div id="rhs" class="container-fluid">
-                        <div class="row">
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-
-                                </div>
-                            </div>
-                            <div class="col col-md-3 cell">
-                                <img src="../assets/nuowei.jpg" alt="" width="100%">
-                                <div>
-                                    <p style="display: inline">挪威的森林</p> <br> <p style="display: inline">作者： 村上春树</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <span>书籍展览</span>
+            <button v-if="this.$store.state.isManager">添加书籍 </button>
         </div>
     </div>
 </template>
 
 <script>
+    import Book from "../components/Book"
     export default {
         name: "Books",
         components:{
-
         }
     }
 </script>
