@@ -80,6 +80,7 @@
             signout(){
                 this.$store.commit('Person/changeManage',false);
                 this.$store.commit('Person/changeLogin');
+                location.reload();
             }
         }
     }
