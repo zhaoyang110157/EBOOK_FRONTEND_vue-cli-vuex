@@ -15,16 +15,20 @@
 
             <ul v-if="layout == 'grid'" class="grid">
                 <!-- 这种布局只显示缩略图片不显示文字 -->
-                <li v-for="a in this.$store.state.Books.articles">
-                    <a v-bind:href="a.url" rel="external nofollow" target="_blank"><img v-bind:src="a.image.large" alt=""/></a>
+                <li v-for="(a,index) in articles" :key="index">
+                    <router-link to="{/Book:'index'}">
+                        <img v-bind:src="a.image" alt=""/>
+                    </router-link>
                 </li>
             </ul>
 
             <ul v-if="layout == 'list'" class="list">
                 <!-- 这种布局显示小图片和文字 -->
-                <li v-for="a in this.$store.state.Books.articles">
-                    <a v-bind:href="a.url"rel="external nofollow" target="_blank"><img v-bind:src="a.image.small" alt="" /></a>
-                    <p>{{a.title}}</p>
+                <li v-for="a in articles">
+                    <router-link to="{/Book:'index'}">
+                        <img v-bind:src="a.image" alt="" />
+                        <p>{{a.title}}</p>
+                    </router-link>
                 </li>
             </ul>
         </form>
@@ -32,8 +36,7 @@
 </template>
 
 <script>
-    import Book from "../components/Book"
-    import {mapState} from 'vuex'
+    import {mapState} from'vuex'
     export default {
         name: "Books",
         data() {
@@ -41,10 +44,13 @@
                 // 布局形式可能的值为grid或者list
                 layout: 'grid',
             }
-
         },
         components:{
-            Book
+        },
+        computed: {
+            ...mapState({
+                articles: state => state.Books.articles
+            })
         }
     }
 </script>
@@ -71,10 +77,6 @@
     section, footer, header, aside, nav{
         display: block;
     }
-
-    /*-------------------------
-     导航栏样式
-    --------------------------*/
 
     .bar{
         display: flex;
@@ -150,8 +152,7 @@
     }
 
     ul.list li img{
-        width:25%;
-        height:120px;
+        height:140px;
         float:left;
         border:none;
     }
@@ -174,14 +175,15 @@
 
     ul.grid li{
         padding: 1px;
+        display: flex;
+        justify-content: center;
         float:left;
+        width: 25%;
         cursor: pointer;
-        border: 10px solid #e8e8e8;
         box-sizing: border-box;
     }
 
     ul.grid li img{
-        width:280px;
         height:280px;
         object-fit: cover;
         display:block;
@@ -189,5 +191,6 @@
         padding: 10px;
         box-sizing: border-box;
     }
+
 </style>
 

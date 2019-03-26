@@ -1,6 +1,10 @@
 <template>
     <div>
+        <ul class="list">
+            <li v-for="user in this.$store.state.Person.users">
 
+            </li>
+        </ul>
     </div>
 </template>
 

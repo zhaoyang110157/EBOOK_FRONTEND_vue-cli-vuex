@@ -7,7 +7,7 @@ import Log from "../pages/Log";
 import Users from "../pages/Users";
 import Orders from "../pages/Orders";
 import Home from  "../pages/Home";
-
+import Book from "../components/Book"
 Vue.use(VueRouter);
 
 export default new VueRouter ({
@@ -16,6 +16,10 @@ export default new VueRouter ({
         {
             path:'/Books',
             component: Books
+        },
+        {
+            path:'/Book',
+            component: Book
         },
         {
             path:'/Cart',
