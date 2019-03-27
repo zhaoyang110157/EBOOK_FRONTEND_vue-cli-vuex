@@ -1,6 +1,8 @@
 <template>
     <div>
-s
+
+        <span>fuckwerfkfjhgf75</span>
+        <img src="../../public/image/nuowei.jpg" height="280" width="194"/>
     </div>
 </template>
 

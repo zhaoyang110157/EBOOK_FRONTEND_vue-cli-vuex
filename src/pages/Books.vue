@@ -16,7 +16,7 @@
             <ul v-if="layout == 'grid'" class="grid">
                 <!-- 这种布局只显示缩略图片不显示文字 -->
                 <li v-for="(a,index) in articles" :key="index">
-                    <router-link to="{/Book:'index'}">
+                    <router-link to="{path:'/Book',query:{a}}">
                         <img v-bind:src="a.image" alt=""/>
                     </router-link>
                 </li>
