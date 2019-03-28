@@ -1,6 +1,6 @@
 const state ={
-    isManager : false,
-    isLogin :false,
+    isManager : true,
+    isLogin :true,
     users: [
         {
             account: 'lzw',
