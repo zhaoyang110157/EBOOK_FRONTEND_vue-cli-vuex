@@ -25,13 +25,13 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" v-if="this.$store.state.Person.isManager" to="/Orders">
+                    <router-link class="nav-link" v-if="this.$store.state.Person.isManager" to="/Users">
                         <button type="button" class="btn btn-default btn-lg">
                         <span class="iconfont icon-manage"></span>
                         Users
                     </button>
                     </router-link>
-                    <router-link class="nav-link" v-else to="/Users">
+                    <router-link class="nav-link" v-else to="/Orders">
                         <button type="button" class="btn btn-default btn-lg">
                         <span class="iconfont icon-project-copy"></span>
                         Orders
