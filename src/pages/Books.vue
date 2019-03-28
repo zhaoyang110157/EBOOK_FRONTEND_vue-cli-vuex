@@ -16,19 +16,21 @@
             <ul v-if="layout == 'grid'" class="grid">
                 <!-- 这种布局只显示缩略图片不显示文字 -->
                 <li v-for="(a,index) in articles" :key="index">
-                    <router-link to="{path:'/Book',query:{a}}">
-                        <img v-bind:src="a.image" alt=""/>
-                    </router-link>
+                        <img v-bind:src="a.image" alt="查看详情" @click="detail(index)"/>
                 </li>
             </ul>
 
             <ul v-if="layout == 'list'" class="list">
                 <!-- 这种布局显示小图片和文字 -->
-                <li v-for="a in articles">
-                    <router-link to="{/Book:'index'}">
-                        <img v-bind:src="a.image" alt="" />
-                        <p>{{a.title}}</p>
-                    </router-link>
+                <li v-for="(a,index) in articles" :key="index">
+                    <div style="display: flex; justify-content: space-around" >
+                        <img v-bind:src="a.image" alt="查看详情" />
+                        <div style="margin-top: 20px;">
+                            <h3>{{a.title}}</h3>
+                            <h5>售价：  {{a.price}}  元</h5>
+                            <h5 @click="detail(index)">详情……</h5>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </form>
@@ -44,6 +46,12 @@
                 // 布局形式可能的值为grid或者list
                 layout: 'grid',
             }
+        },
+        methods:{
+          detail(index){
+                this.$store.commit('Books/changeAim',index);
+                this.$router.push('/Book');
+          }
         },
         components:{
         },
