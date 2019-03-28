@@ -4,6 +4,10 @@
            <li v-for="(user,index) in users" :key="index">
                <p>{{user.name}}</p>
                <p>{{user.allowed}}</p>
+               <div class="switch" data-on="warning" data-off="danger">
+                   <input type="checkbox" checked />
+               </div>
+
            </li>
        </ul>
     </div>
