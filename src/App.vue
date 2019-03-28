@@ -15,11 +15,10 @@
 
 <script>
 import Header from  './components/Header.vue'
-import Cart from './components/Cart'
 export default {
     name:'app',
     components:{
-        Header,Cart
+        Header
     }
 }
 </script>

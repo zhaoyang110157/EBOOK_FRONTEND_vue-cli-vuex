@@ -1,21 +1,21 @@
 const state ={
-    isManager : true,
-    isLogin :true,
+    isManager : false,
+    isLogin :false,
     users: [
         {
-            account: 'lzw',
+            account: 'zhao',
             password: '123',
             allowed: true,
             role: 'manager'
         },
         {
-            account: '舒伯特',
+            account: '123',
             password: '123',
             allowed: true,
             role:'custom'
         },
         {
-            account: '本拉登',
+            account: 'dump',
             password: '123',
             allowed: false,
             role:'custom'
@@ -33,8 +33,8 @@ const mutations = {
     addUser (state, user) {
         state.users.push(user)
     },
-    changeAllow (state, item) {
-        state.users[item.index].allowed = item.allowed
+    changeAllow (state, index) {
+        state.users[index].allowed = !state.users[index].allowed
     }
 };
 

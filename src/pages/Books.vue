@@ -24,8 +24,8 @@
                 <!-- 这种布局显示小图片和文字 -->
                 <li v-for="(a,index) in articles" :key="index">
                     <div style="display: flex; justify-content: space-around" >
-                        <img v-bind:src="a.image" alt="查看详情" />
-                        <div style="margin-top: 20px;">
+                        <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
+                        <div style="margin-top: 20px; width: 400px">
                             <h3>{{a.title}}</h3>
                             <h5>售价：  {{a.price}}  元</h5>
                             <h5 @click="detail(index)">详情……</h5>
@@ -93,7 +93,7 @@
         border-radius: 5px;
         width: 80%;
         padding: 10px;
-        margin: 45px auto 25px;
+        margin: 45px auto;
         position:relative;
         text-align:right;
         line-height: 1;
@@ -106,7 +106,6 @@
         display:inline-block;
         text-decoration:none !important;
         margin-right:5px;
-        border-radius:5px;
         cursor:pointer;
     }
 
@@ -160,7 +159,7 @@
     }
 
     ul.list li img{
-        height:140px;
+        height:200px;
         float:left;
         border:none;
     }

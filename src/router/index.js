@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Cart from '../components/Cart'
 import Books from '../pages/Books'
 import Search from '../pages/Search'
 import Log from "../pages/Log";
@@ -8,6 +7,7 @@ import Users from "../pages/Users";
 import Orders from "../pages/Orders";
 import Home from  "../pages/Home";
 import Book from "../components/Book"
+import Cart from "../components/Cart"
 Vue.use(VueRouter);
 
 export default new VueRouter ({
@@ -48,6 +48,10 @@ export default new VueRouter ({
         {
             path:'/',
             redirect:'/Home'
+        },
+        {
+            path:'/Cart',
+            component:Cart
         }
      ]
 })

@@ -14,8 +14,7 @@
             </div>
             <hr>
             <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit">Log in</button>
-            <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="submit" @click="up=!up">Log up</button>
-            <p class="mt-5 mb-3 text-muted"> © 上海交通大学 朱朝阳</p>
+            <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="button" @click="up=!up">Log up</button>
         </form>
 
         <form   v-show="up" class="form-signin" onsubmit="return upClick();">
@@ -28,9 +27,8 @@
             <input type="password" class="form-control" v-model="SignUp.confirm_password" placeholder="Confirm Password" required autofocus>
             <label for="inputPassword" class="sr-only">E-mail</label>
             <input type="email"  class="form-control" v-model="SignUp.email" placeholder="E-mail" required autofocus >
-            <button class="btn btn-group-lg btn-primary btn-block" type="submit" @click="url1">Log up</button>
+            <button class="btn btn-group-lg btn-primary btn-block" type="submit" >Log up</button>
             <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="submit" @click="up=!up">Back</button>
-            <p class="mt-5 mb-3 text-muted"> © 上海交通大学 朱朝阳</p>
         </form>
     </div>
 
@@ -104,8 +102,7 @@
         },
         mounted() {
             window.inClick = ()=>{
-                this.url1();
-                /*
+                this.url1();/*
                    * 这里的this，指向的是Vue实例，并不是window，
                    * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
                    */

@@ -15,7 +15,16 @@
                 </div>
             </li>
         </ul>
-
+        <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" style="margin-left: 40%">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="请输入购买量" aria-label="Input group example" aria-describedby="btnGroupAddon">
+            </div>
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-outline-secondary">- 1</button>
+                <button type="button" class="btn btn-outline-secondary">加入购物车</button>
+                <button type="button" class="btn btn-outline-secondary">+1</button>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -34,5 +43,7 @@
 </script>
 
 <style scoped>
-
+ img{
+     width: 194px;height: 280px;
+ }
 </style>
