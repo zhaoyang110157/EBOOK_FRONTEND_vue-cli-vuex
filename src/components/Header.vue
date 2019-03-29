@@ -31,7 +31,7 @@
                         Users
                     </button>
                     </router-link>
-                    <router-link class="nav-link" v-else to="/Orders">
+                    <router-link class="nav-link" v-else to="/Cart">
                         <button type="button" class="btn btn-default btn-lg">
                         <span class="iconfont icon-cart"></span>
                         Carts
@@ -44,7 +44,7 @@
                     <el-dropdown class="mr-3" style="cursor: pointer" trigger="click">
                         <span class="el-dropdown-link">
                             <i class="iconfont icon-guanliyuan text-primary" v-if="this.$store.state.Person.isManager">管理员</i>
-                            <i class="iconfont icon-wode text-primary" v-else>中心</i>
+                            <i class="iconfont icon-wode text-primary" v-else>个人中心</i>
                             <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
@@ -57,7 +57,7 @@
                             <el-dropdown-item>
                                 <div >
                                     <span class="iconfont icon-project-copy"></span>
-                                   历史订单
+                                    <router-link to="/Orders">历史订单</router-link>
                                 </div>
                             </el-dropdown-item>
                             <el-dropdown-item >

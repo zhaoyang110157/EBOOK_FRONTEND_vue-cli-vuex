@@ -9,7 +9,7 @@
         <form class="navbar-form navbar-left" id="rhs">
             <div class="form-group">
                 <span class="iconfont icon-sousuo label" aria-hidden="true" aria-label="search"></span>
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="Search" v-model="search">
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
         </form>
@@ -18,7 +18,12 @@
 
 <script>
     export default {
-        name: "Search"
+        name: "Search",
+        data(){
+            return{
+                search:""
+            }
+        }
     }
 </script>
 
