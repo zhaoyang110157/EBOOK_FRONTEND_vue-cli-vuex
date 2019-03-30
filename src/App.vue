@@ -2,7 +2,6 @@
     <div id="app" >
         <Header/>
         <router-view/>
-        <cart></cart>
         <div id="but" class="bg-transparent">
             <a href="#">
                 <el-button type="warning"  plain circle>

@@ -57,12 +57,13 @@
         },
         methods:{
             url1(){
-                for (let user of this.users) {
+                for (let index =0;index<this.users.length;index++ ) {
+                    let user = this.users[index];
                     if (this.SignIn.account === user.account )
                         if(this.SignIn.password === user.password) {
                             if (user.allowed) {
-                                this.$store.commit('Person/changeLogin');
-                                if (user.role === "manager") this.$store.commit('Person/changeManager',true);
+                                this.$store.commit('Person/changeLogin', index);
+                                if (user.role === "manager") this.$store.commit('Person/changeManager', true);
                                 this.$message.success('登陆成功');
                                 this.$router.push('/Home');
                                 break
@@ -71,10 +72,9 @@
                                 return false
                             }
                         }
-                        else {
-                            this.$message.warning('错误的用户名或密码');
-                        }
                 }
+                if(this.isLogin === -1)
+                this.$message.warning('错误的用户名或密码');
             },
             url2(){
                 for (let user of this.users) {
@@ -95,7 +95,7 @@
                     allowed: true,
                     role:'custom'
                 }
-                this.$store.commit('Person/changeLogin');
+                this.$store.commit('Person/changeLogin',this.users.length);
                 this.$store.commit('Person/addUser()',user);
                 this.$router.push('/Books');
             }
@@ -114,6 +114,7 @@
         computed: {
             ...mapState({
                 users: state => state.Person.users,
+                isLogin: state => state.Person.isLogin
             }),
         }
 

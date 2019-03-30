@@ -1,6 +1,6 @@
 const state ={
     isManager : false,
-    isLogin :false,
+    isLogin :-1,
     users: [
         {
             account: 'zhao',
@@ -27,8 +27,8 @@ const mutations = {
     changeManager (state,is) {
         state.isManager = is;
     },
-    changeLogin (state) {
-        state.isLogin = !state.isLogin
+    changeLogin (state,index) {
+        state.isLogin = index
     },
     addUser (state, user) {
         state.users.push(user)

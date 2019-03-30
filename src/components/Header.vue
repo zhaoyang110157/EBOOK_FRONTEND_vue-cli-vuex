@@ -40,7 +40,14 @@
                 </li>
             </ul>
             <div>
-                <div class="row mr-0" v-if="this.$store.state.Person.isLogin">
+
+                <router-link v-if="isLogin === -1" to="/Log">
+                    <button type="button" class="btn btn-default btn-lg">
+                    <span class="iconfont icon-weidenglu"></span>
+                    <span>登录/注册</span>
+                </button>
+                </router-link>
+                <div class="row mr-0" v-else>
                     <el-dropdown class="mr-3" style="cursor: pointer" trigger="click">
                         <span class="el-dropdown-link">
                             <i class="iconfont icon-guanliyuan text-primary" v-if="this.$store.state.Person.isManager">管理员</i>
@@ -50,8 +57,8 @@
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
                                 <div >
-                                    <span class="iconfont icon-tongji"></span>
-                                    个人信息
+
+                                    用户名：{{users[isLogin].account}}
                                 </div>
                             </el-dropdown-item>
                             <el-dropdown-item>
@@ -68,27 +75,33 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
-                <router-link v-else to="/Log">
-                    <button type="button" class="btn btn-default btn-lg">
-                    <span class="iconfont icon-weidenglu"></span>
-                    <span>登录/注册</span>
-                </button>
-                </router-link>
             </div>
         </nav>
     </div>
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
         name: "Header",
+        data(){
+          return {
+              personal:false
+          }
+        },
         methods:{
             signout(){
                 this.$store.commit('Person/changeManage',false);
                 this.$store.commit('Person/changeLogin');
                 this.$router.push('/Home');
                 history.go(0);
-            }
+            },
+        },
+        computed:{
+            ...mapState({
+                isLogin: state=>state.Person.isLogin,
+                users: state=>state.Person.users
+            })
         }
     }
 </script>
