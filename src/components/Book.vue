@@ -19,9 +19,24 @@
                 <button type="button"  @click="buy(num,a)" class="btn btn-outline-secondary">加入购物车</button>
                 <button type="button" @click="num++;" class="btn btn-outline-secondary">+1</button>
             </div>
+            <button v-show="isManager" type="button" @click="modify = !modify" class="btn btn-outline-secondary"> 数据修改</button>
         </div>
-
+        <div v-if="modify" style="float:left; margin-left: 100px; width: 85%; height: 200px;  position: relative; ">
+            <form   class="form-signin" onsubmit="return upClick();">
+                <label  class="sr-only">书名</label>
+                <input type="text"  class="form-control" v-model="a.title" required autofocus >
+                <label class="sr-only">作者</label>
+                <input type="text"  class="form-control" v-model="a.writer" required autofocus>
+                <label class="sr-only">库存</label>
+                <input type="text" class="form-control" v-model="a.inventory" required autofocus>
+                <label  class="sr-only">ISBN</label>
+                <input type="text"  class="form-control" v-model="a.ISBN"required autofocus >
+                <label  class="sr-only">简介</label>
+                <input type="text"  class="form-control" v-model="a.intro"required autofocus >
+            </form>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -30,7 +45,8 @@
         name: "Book",
         data(){
           return {
-              num : 0
+              num : 0,
+              modify: false
           }
         },
         methods:{
@@ -95,7 +111,8 @@
                 wen: state => state.Books.wen,
                 science: state => state.Books.science,
                 magazine: state => state.Books.magazine,
-                isLogin: state => state.Person.isLogin
+                isLogin: state => state.Person.isLogin,
+                isManager: state => state.Person.isManager
             })
         }
     }
