@@ -15,20 +15,14 @@
 
             <ul v-if="layout == 'grid'" class="grid">
                 <!-- 这种布局只显示缩略图片不显示文字 -->
-                <li v-for="(a,index) in wen" :key="index">
+                <li v-for="(a,index) in books" :key="index">
                         <img v-bind:src="a.image" alt="查看详情" @click="detail(a)"/>
-                </li>
-                <li v-for="(a,index) in science" :key="index">
-                    <img v-bind:src="a.image" alt="查看详情" @click="detail(a)"/>
-                </li>
-                <li v-for="(a,index) in magazine" :key="index">
-                    <img v-bind:src="a.image" alt="查看详情" @click="detail(a)"/>
                 </li>
             </ul>
 
             <ul v-if="layout == 'list'" class="list">
                 <!-- 这种布局显示小图片和文字 -->
-                <li v-for="(a,index) in wen" :key="index">
+                <li v-for="(a,index) in books" :key="index">
                     <div style="display: flex; justify-content: space-around" >
                         <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
                         <div style="margin-top: 20px; width: 400px">
@@ -38,26 +32,7 @@
                         </div>
                     </div>
                 </li>
-                <li v-for="(a,index) in science" :key="index">
-                    <div style="display: flex; justify-content: space-around" >
-                        <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
-                        <div style="margin-top: 20px; width: 400px">
-                            <h3>{{a.title}}</h3>
-                            <h5>售价：  {{a.price}}  元</h5>
-                            <h5 @click="detail(a)">详情……</h5>
-                        </div>
-                    </div>
-                </li>
-                <li v-for="(a,index) in magazine" :key="index">
-                    <div style="display: flex; justify-content: space-around" >
-                        <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
-                        <div style="margin-top: 20px; width: 400px">
-                            <h3>{{a.title}}</h3>
-                            <h5>售价：  {{a.price}}  元</h5>
-                            <h5 @click="detail(a)">详情……</h5>
-                        </div>
-                    </div>
-                </li>
+
             </ul>
         </form>
     </div>
@@ -79,13 +54,9 @@
                 this.$router.push('/Book');
           }
         },
-        components:{
-        },
         computed: {
             ...mapState({
-                wen: state => state.Books.wen,
-                science: state => state.Books.science,
-                magazine: state => state.Books.magazine
+                books: state => state.Books.books
             })
         }
     }

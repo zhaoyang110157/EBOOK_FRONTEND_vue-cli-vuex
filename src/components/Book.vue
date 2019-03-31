@@ -34,59 +34,68 @@
           }
         },
         methods:{
-                buy(a, b) {
-                if(a<1) {
-                    this.$message({
-                        message:'我们不接受赠书',
-                        type: 'info',
-                        duration: 1000,
-                        showClose: true
-                    })
-                    return;
-                }
-                if (a > b.inventory)
-                    this.$message({
-                        message:'我们没有那么多',
-                        type: 'warning',
-                        duration: 1000,
-                        showClose: true
-                    })
-                else {
-                    let idExist=this.$store.state.Cart.carts.find((item)=>{
-                        return item.title===b.title
-                    })
-                    if(!idExist){
-                        let cart = {
-                            title : b.title,
-                            image : b.image,
-                            inventory : a,
-                            price : b.price
-                        }
-                        this.$store.commit('Cart/addCart',cart);
+            buy(a, b) {
+                if(this.isLogin !== -1){
+                    if(a<1) {
                         this.$message({
-                            message:'添加购物车成功',
-                            type: 'success',
+                            message:'我们不接受赠书',
+                            type: 'info',
                             duration: 1000,
                             showClose: true
                         })
+                        return;
                     }
-                    else
+                    if (a > b.inventory)
                         this.$message({
-                            message:'已在购物车中',
-                            type: 'error',
+                            message:'我们没有那么多',
+                            type: 'warning',
                             duration: 1000,
                             showClose: true
                         })
-
+                    else {
+                        let idExist=this.$store.state.Cart.carts.find((item)=>{
+                            return item.title===b.title
+                        })
+                        if(!idExist){
+                            let cart = {
+                                title : b.title,
+                                image : b.image,
+                                inventory : a,
+                                price : b.price
+                            }
+                            this.$store.commit('Cart/addCart',cart);
+                            this.$message({
+                                message:'添加购物车成功',
+                                type: 'success',
+                                duration: 1000,
+                                showClose: true
+                            })
+                        }
+                        else
+                            this.$message({
+                                message:'已在购物车中',
+                                type: 'error',
+                                duration: 1000,
+                                showClose: true
+                            })
+                    }
                 }
-            }//图书购买简易
+                else
+                    this.$message({
+                        message:'您尚未登陆',
+                        type: 'error',
+                        duration: 1000,
+                        showClose: true
+                    })
+            }
         } ,
         computed: {
             ...mapState({
                 a: state => state.Books.aim,
                 wen: state => state.Books.wen,
                 science: state => state.Books.science,
-                magazine: state => state.Books.magazine
+                magazine: state => state.Books.magazine,
+                isLogin: state => state.Person.isLogin
             })
         }
     }
