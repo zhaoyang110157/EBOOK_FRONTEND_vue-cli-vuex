@@ -62,6 +62,9 @@ const state ={
 const mutations = {
     changeAim(state,index){
         state.aim = index;
+    },
+    addBook (state, book) {
+        state.books.push(book)
     }
 };
 

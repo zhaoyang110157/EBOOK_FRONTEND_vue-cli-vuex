@@ -94,8 +94,7 @@
             },
             url2(){
                 for (let user of this.users) {
-                    if (this.SignIn.account === user.account ){
-
+                    if (this.SignUp.account === user.account ){
                         this.$message({
                             message:'用户名已存在',
                             type: 'warning',
@@ -115,16 +114,15 @@
                     })
                     return;
                 }
-                alert(this.SignUp.account);
                 let user={
-                    account: this.SignIn.account,
-                    password: this.SignIn.password,
+                    account: this.SignUp.account,
+                    password: this.SignUp.password,
                     allowed: true,
                     role:'custom'
                 }
                 this.$store.commit('Person/changeLogin',this.users.length);
-                this.$store.commit('Person/addUser()',user);
-                this.$router.push('/Books');
+                this.$store.commit('Person/addUser',user);
+                this.$router.push('/Home');
             }
         },
         mounted() {

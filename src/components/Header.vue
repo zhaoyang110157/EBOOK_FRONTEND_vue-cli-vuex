@@ -57,7 +57,6 @@
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
                                 <div >
-
                                     用户名：{{users[isLogin].account}}
                                 </div>
                             </el-dropdown-item>
@@ -91,10 +90,10 @@
         },
         methods:{
             signout(){
-                this.$store.commit('Person/changeManage',false);
-                this.$store.commit('Person/changeLogin');
+                this.$store.commit('Person/changeManager',false);
+                this.$store.commit('Person/changeLogin',-1);
                 this.$router.push('/Home');
-                history.go(0);
+                this.$forceUpdate();
             },
         },
         computed:{

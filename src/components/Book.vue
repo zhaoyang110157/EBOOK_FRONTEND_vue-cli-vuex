@@ -11,10 +11,10 @@
             </div>
         </div>
         <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" style="margin-left: 40%">
-            <div class="input-group">
+            <div v-show="!isManager" class="input-group">
                 <input type="text" class="form-control" placeholder="请输入购买量" aria-label="Input group example" aria-describedby="btnGroupAddon" v-model="num">
             </div>
-            <div class="btn-group mr-2" role="group" aria-label="First group">
+            <div v-show="!isManager" class="btn-group mr-2" role="group" aria-label="First group">
                 <button type="button" @click="num-=1;" class="btn btn-outline-secondary">- 1</button>
                 <button type="button"  @click="buy(num,a)" class="btn btn-outline-secondary">加入购物车</button>
                 <button type="button" @click="num++;" class="btn btn-outline-secondary">+1</button>
@@ -22,17 +22,24 @@
             <button v-show="isManager" type="button" @click="modify = !modify" class="btn btn-outline-secondary"> 数据修改</button>
         </div>
         <div v-if="modify" style="float:left; margin-left: 100px; width: 85%; height: 200px;  position: relative; ">
-            <form   class="form-signin" onsubmit="return upClick();">
+            <form   class="form-signin" >
                 <label  class="sr-only">书名</label>
-                <input type="text"  class="form-control" v-model="a.title" required autofocus >
+                <input type="text"  class="form-control" placeholder="请输入标题" v-model="a.title" required autofocus >
                 <label class="sr-only">作者</label>
-                <input type="text"  class="form-control" v-model="a.writer" required autofocus>
+                <input type="text"  class="form-control" placeholder="请输入作者" v-model="a.writer" required autofocus>
                 <label class="sr-only">库存</label>
-                <input type="text" class="form-control" v-model="a.inventory" required autofocus>
+                <input type="text" class="form-control" placeholder="请输入库存" v-model="a.inventory" required autofocus>
+                <label class="sr-only">价格</label>
+                <input type="text" class="form-control" placeholder="请输入价格" v-model="a.price" required autofocus>
                 <label  class="sr-only">ISBN</label>
-                <input type="text"  class="form-control" v-model="a.ISBN"required autofocus >
+                <input type="text"  class="form-control" placeholder="请输入ISBN" v-model="a.ISBN"required autofocus >
                 <label  class="sr-only">简介</label>
-                <input type="text"  class="form-control" v-model="a.intro"required autofocus >
+                <el-input
+                        type="textarea"
+                        :autosize="{ minRows: 2, maxRows: 5}"
+                        placeholder="请输入简介"
+                        v-model="a.intro" required autofocus>
+                </el-input>
             </form>
         </div>
     </div>
@@ -121,5 +128,22 @@
 <style scoped>
  img{
      width: 194px;height: 280px;
+ }
+ .form-signin {
+     width: 100%;
+     max-width: 450px;
+     padding: 15px;
+     margin: auto;
+ }
+ .form-signin .checkbox {
+     font-weight: 400;
+ }
+ .form-signin .form-control {
+     position: relative;
+     box-sizing: border-box;
+     height: auto;
+     padding: 10px;
+     font-size: 16px;
+     margin-bottom: 10px;
  }
 </style>

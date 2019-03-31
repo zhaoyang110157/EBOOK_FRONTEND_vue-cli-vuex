@@ -5,35 +5,60 @@
             <div class="bar">
                 <!-- 这两个按钮用于转换页面布局形式，使得UL布局正确显示 -->
                 <span>书籍展览</span>
-                <button class="btn btn-default btn-lg" v-if="this.$store.state.Person.isManager">添加书籍 </button>
+                <button class="btn btn-default btn-lg" v-if="isManager" @click="add_book=!add_book">添加书籍 </button>
                 <div>
                     <a class="list-icon" v-bind:class="{ 'active': layout == 'list'}" v-on:click="layout = 'list'"></a>
                     <a class="grid-icon" v-bind:class="{ 'active': layout == 'grid'}" v-on:click="layout = 'grid'"></a>
                 </div>
 
             </div>
-
-            <ul v-if="layout == 'grid'" class="grid">
-                <!-- 这种布局只显示缩略图片不显示文字 -->
-                <li v-for="(a,index) in books" :key="index">
+            <div v-if="!add_book">
+                <ul v-if="layout == 'grid'" class="grid">
+                    <!-- 这种布局只显示缩略图片不显示文字 -->
+                    <li v-for="(a,index) in books" :key="index">
                         <img v-bind:src="a.image" alt="查看详情" @click="detail(a)"/>
-                </li>
-            </ul>
+                    </li>
+                </ul>
 
-            <ul v-if="layout == 'list'" class="list">
-                <!-- 这种布局显示小图片和文字 -->
-                <li v-for="(a,index) in books" :key="index">
-                    <div style="display: flex; justify-content: space-around" >
-                        <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
-                        <div style="margin-top: 20px; width: 400px">
-                            <h3>{{a.title}}</h3>
-                            <h5>售价：  {{a.price}}  元</h5>
-                            <h5 @click="detail(a)">详情……</h5>
+                <ul v-if="layout == 'list'" class="list">
+                    <!-- 这种布局显示小图片和文字 -->
+                    <li v-for="(a,index) in books" :key="index">
+                        <div style="display: flex; justify-content: space-around" >
+                            <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
+                            <div style="margin-top: 20px; width: 400px">
+                                <h3>{{a.title}}</h3>
+                                <h5>售价：  {{a.price}}  元</h5>
+                                <h5 @click="detail(a)">详情……</h5>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </ul>
+            </div>
+            <div v-else>
+                <form   class="form-signin" onsubmit="return addBook();">
+                    <label  class="sr-only">书名</label>
+                    <input type="text"  class="form-control" placeholder="请输入书名" v-model="Book.title" required autofocus >
+                    <label class="sr-only">作者</label>
+                    <input type="text"  class="form-control" placeholder="请输入作者"  v-model="Book.writer" required autofocus>
+                    <label class="sr-only">库存</label>
+                    <input type="text" class="form-control" placeholder="请输入库存"  v-model="Book.inventory" required autofocus>
+                    <label  class="sr-only">ISBN</label>
+                    <input type="text"  class="form-control" placeholder="请输入ISBN"  v-model="Book.ISBN"required autofocus >
+                    <label  class="sr-only">分类</label>
+                    <input type="text"  class="form-control" placeholder="请输入分类"  v-model="Book.group"required autofocus >
+                    <label  class="sr-only">价格</label>
+                    <input type="text"  class="form-control"  placeholder="请输入价格" v-model="Book.price" required autofocus >
+                    <label  class="sr-only">简介</label>
+                    <el-input
+                            type="textarea"
+                            :autosize="{ minRows: 2, maxRows: 5}"
+                            placeholder="请输入简介"
+                            v-model="Book.intro" required autofocus>
+                    </el-input>
 
-            </ul>
+                    <button class="btn btn-group-lg btn-primary btn-block" type="submit" style="margin-top: 20px" >确认添加</button>
+                </form>
+            </div>
         </form>
     </div>
 </template>
@@ -46,19 +71,43 @@
             return{
                 // 布局形式可能的值为grid或者list
                 layout: 'grid',
+                add_book: false,
+                Book:{
+                    title:"",
+                    writer:"",
+                    price:"",
+                    inventory:"",
+                    ISBN:"",
+                    intro:"",
+                    group:""
+                }
             }
         },
         methods:{
-          detail(index){
-                this.$store.commit('Books/changeAim',index);
-                this.$router.push('/Book');
+          detail(index) {
+              this.$store.commit('Books/changeAim', index);
+              this.$router.push('/Book');
+          },
+            book_added(){
+                this.$store.commit('Books/addBook',this.Book);
+                this.add_book = !this.add_book;
+                //this.Book.title = this.Book.writer = this.Book.inventory = this.Book.ISBN = this.Book.intro = "";
           }
         },
         computed: {
             ...mapState({
-                books: state => state.Books.books
+                books: state => state.Books.books,
+                isManager: state => state.Person.isManager
             })
-        }
+        },
+        mounted() {
+            window.addBook = ()=>{
+                this.book_added();/*
+                   * 这里的this，指向的是Vue实例，并不是window，
+                   * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
+                   */
+            }
+        },
     }
 </script>
 
@@ -198,5 +247,24 @@
         box-sizing: border-box;
     }
 
+    /* 添加书籍*/
+
+    .form-signin {
+        width: 100%;
+        max-width: 450px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
 </style>
 
