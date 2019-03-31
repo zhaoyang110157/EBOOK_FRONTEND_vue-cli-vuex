@@ -64,28 +64,55 @@
                             if (user.allowed) {
                                 this.$store.commit('Person/changeLogin', index);
                                 if (user.role === "manager") this.$store.commit('Person/changeManager', true);
-                                this.$message.success('登陆成功');
+                                this.$message({
+                                    message:'登陆成功',
+                                    type: 'success',
+                                    duration: 1000,
+                                    showClose: true
+                                })
                                 this.$router.push('/Home');
                                 break
                             } else {
-                                this.$message.error('用户已被禁用');
+                                this.$message({
+                                    message:'用户已被禁用',
+                                    type: 'error',
+                                    duration: 1000,
+                                    showClose: true
+                                })
                                 return false
                             }
                         }
                 }
                 if(this.isLogin === -1)
-                this.$message.warning('错误的用户名或密码');
+
+                    this.$message({
+                        message:'错误的用户名或密码',
+                        type: 'warning',
+                        duration: 1000,
+                        showClose: true
+                    })
             },
             url2(){
                 for (let user of this.users) {
                     if (this.SignIn.account === user.account ){
-                        this.$message.warning('用户名已存在');
+
+                        this.$message({
+                            message:'用户名已存在',
+                            type: 'warning',
+                            duration: 1000,
+                            showClose: true
+                        })
                         return;
                     }
                 }
                 if(this.SignUp.password !== this.SignUp.confirm_password)
                 {
-                    this.$message.warning('两次密码不相同');
+                    this.$message({
+                        message:'两次密码不相同',
+                        type: 'warning',
+                        duration: 1000,
+                        showClose: true
+                    })
                     return;
                 }
                 alert(this.SignUp.account);

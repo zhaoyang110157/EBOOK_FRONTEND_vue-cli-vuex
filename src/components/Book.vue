@@ -16,7 +16,7 @@
             </div>
             <div class="btn-group mr-2" role="group" aria-label="First group">
                 <button type="button" @click="num-=1;" class="btn btn-outline-secondary">- 1</button>
-                <button type="button"  @click="buy(num,a.inventory)" class="btn btn-outline-secondary">加入购物车</button>
+                <button type="button"  @click="buy(num,a)" class="btn btn-outline-secondary">加入购物车</button>
                 <button type="button" @click="num++;" class="btn btn-outline-secondary">+1</button>
             </div>
         </div>
@@ -34,15 +34,50 @@
           }
         },
         methods:{
-            buy(a, b) {
+                buy(a, b) {
                 if(a<1) {
-                    alert("我们不接受赠书");
+                    this.$message({
+                        message:'我们不接受赠书',
+                        type: 'info',
+                        duration: 1000,
+                        showClose: true
+                    })
                     return;
                 }
-
-                if (a > b) alert("我们没有那么多");
+                if (a > b.inventory)
+                    this.$message({
+                        message:'我们没有那么多',
+                        type: 'warning',
+                        duration: 1000,
+                        showClose: true
+                    })
                 else {
-                    alert("添加购物车成功");
+                    let idExist=this.$store.state.Cart.carts.find((item)=>{
+                        return item.title===b.title
+                    })
+                    if(!idExist){
+                        let cart = {
+                            title : b.title,
+                            image : b.image,
+                            inventory : a,
+                            price : b.price
+                        }
+                        this.$store.commit('Cart/addCart',cart);
+                        this.$message({
+                            message:'添加购物车成功',
+                            type: 'success',
+                            duration: 1000,
+                            showClose: true
+                        })
+                    }
+                    else
+                        this.$message({
+                            message:'已在购物车中',
+                            type: 'error',
+                            duration: 1000,
+                            showClose: true
+                        })
+
                 }
             }//图书购买简易
         } ,
