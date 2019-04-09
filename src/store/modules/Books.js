@@ -6,7 +6,7 @@ const state ={
             "image":  "./image/nuowei.jpg",
             "ISBN":"ISBN : 9787532755387",
             "writer":"作者: 村上春树 著，林少华 译",
-            "inventory":"10",
+            "inventory":10,
             "price":"50",
             "group":"literature",
             "intro":"　《挪威的森林（电影特别版）》是一部动人心弦的、平缓舒雅的、略带感伤的、百分之百的恋爱小说。\n"+
@@ -29,7 +29,7 @@ const state ={
             "image":  "./image/nitu.jpg",
             "ISBN":"ISBN : 9787533955588",
             "writer":"作者: [美] 希拉莉·乔顿 著 ； 房小然 译",
-            "inventory":"10",
+            "inventory":10,
             "price":"30",
             "group":"literature",
             "intro":"　☆犹如密西西比三角洲的一场暴雨直面在泥淖中扭曲的血性和激情"+
@@ -41,8 +41,8 @@ const state ={
             "image":  "./image/hafu.jpg",
             "ISBN":"ISBN :  9787511339065",
             "writer":"作者: 杜晗 编",
-            "inventory":"10",
-            "price":"50",
+            "inventory":10,
+            "price":50,
             "group":"science",
             "intro":"　《哈佛管理学》从战略规划、领导能力、决策管理、绩效管理、中层管理、改革管理、成长战略、时间管理、招聘管理、人才管理、激励员工、交流管理、谈判管理、团队管理、重塑职业生涯、服务管理、财务管理、知识管理、口才管理等方面入手，涵盖了管理学的各个领域。"
         },
@@ -51,8 +51,8 @@ const state ={
             "image":  "./image/zhesi.jpg",
             "ISBN":"ISSN :  1003-3483",
             "writer":"出版单位: \t 时代青年杂志社",
-            "inventory":"10",
-            "price":"50",
+            "inventory":10,
+            "price":50,
             "group":"magazine",
             "intro":"《哲思》是由共青团河南省委主办的面向全国发行的综合文化类月刊。创刊于2002年，以“寻求心灵共鸣，展现人性光辉”为办刊理念，通过清新的文字、灵动的版式、独特的视角、平等的姿态等深入读者心灵。其内容包括“哲思●生活真谛”、“意林●人生絮语”、“成功●生存智慧”、“情感●爱的启示”等几大版块；成为一份清新的、智慧的、深入广大学生和中青年读者心灵的精品期刊。是国家“双效”期刊，河南省优秀期刊。\n十几年来紧密贴近读者，以寻求“心灵共鸣，展现人性光辉”为办刊理念，通过清新的文字、灵动的版式、独特的视角、平等的姿态深入读者心灵。其内容分哲思·生活真谛、意林·人生絮语、成功·生存智慧、情感·爱的启示等几大版式块；辅以有深度的生活、情感故事，成为一份清新的、智慧的，深入广大学生和青中年读者心灵的精品期刊。"
         }
@@ -65,6 +65,12 @@ const mutations = {
     },
     addBook (state, book) {
         state.books.push(book)
+    },
+    buyBooks( state,cart){
+        for(let i = 0 ; i<cart.length;i++){let j=0;
+            for(; j<state.books.length && state.books[j].title != cart[i].title;j++) ;
+            state.books[j].inventory -= cart[i].inventory;
+        }
     }
 };
 
