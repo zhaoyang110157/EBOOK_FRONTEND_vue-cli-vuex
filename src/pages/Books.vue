@@ -43,9 +43,9 @@
                     <label class="sr-only">库存</label>
                     <input type="text" class="form-control" placeholder="请输入库存"  v-model="Book.inventory" required autofocus>
                     <label  class="sr-only">ISBN</label>
-                    <input type="text"  class="form-control" placeholder="请输入ISBN"  v-model="Book.ISBN"required autofocus >
+                    <input type="text"  class="form-control" placeholder="请输入ISBN"  v-model="Book.ISBN" required autofocus >
                     <label  class="sr-only">分类</label>
-                    <input type="text"  class="form-control" placeholder="请输入分类"  v-model="Book.group"required autofocus >
+                    <input type="text"  class="form-control" placeholder="请输入分类"  v-model="Book.group" required autofocus >
                     <label  class="sr-only">价格</label>
                     <input type="text"  class="form-control"  placeholder="请输入价格" v-model="Book.price" required autofocus >
                     <label  class="sr-only">简介</label>

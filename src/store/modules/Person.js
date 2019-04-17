@@ -28,13 +28,16 @@ const mutations = {
         state.isManager = is;
     },
     changeLogin (state,index) {
-        state.isLogin = index
+        state.isLogin = index;
+
+        const params = {}; // 参数
+        fetch.get('', params);
     },
     addUser (state, user) {
         state.users.push(user)
     },
     changeAllow (state, index) {
-        state.users[index].allowed = !state.users[index].allowed
+        state.users[index].allowed = !state.users[index].allowed;
     }
 };
 
