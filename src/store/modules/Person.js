@@ -29,9 +29,6 @@ const mutations = {
     },
     changeLogin (state,index) {
         state.isLogin = index;
-
-        const params = {}; // 参数
-        fetch.get('', params);
     },
     addUser (state, user) {
         state.users.push(user)
