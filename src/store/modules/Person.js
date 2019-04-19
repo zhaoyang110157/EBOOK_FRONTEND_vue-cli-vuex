@@ -1,29 +1,24 @@
+import Axios from "axios";
+
 const state ={
     isManager : false,
     isLogin :-1,
-    users: [
-        {
-            account: 'zhao',
-            password: '123',
-            allowed: true,
-            role: 'manager'
-        },
-        {
-            account: '123',
-            password: '123',
-            allowed: true,
-            role:'custom'
-        },
-        {
-            account: 'dump',
-            password: '123',
-            allowed: false,
-            role:'custom'
-        },
-    ],
+    users: []
 };
 
+const actions = {
+    getUsers(context){
+        Axios.get('http://localhost:8000/serv_war_exploded/Users')
+            .then((res)=>{
+                context.commit('getUsers',res);
+            })
+    }
+}
 const mutations = {
+    getUsers(state,res){
+      state.users = res.data.users;
+      console.log(res);
+    },
     changeManager (state,is) {
         state.isManager = is;
     },
@@ -41,5 +36,6 @@ const mutations = {
 export default {
     namespaced: true,
     state,
+    actions,
     mutations
 }

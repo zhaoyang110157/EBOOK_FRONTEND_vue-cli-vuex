@@ -37,9 +37,9 @@
             <div v-else>
                 <form   class="form-signin" onsubmit="return addBook();">
                     <label  class="sr-only">书名</label>
-                    <input type="text"  class="form-control" placeholder="请输入书名(不得超过10字符）" v-model="Book.title" required autofocus >
+                    <input type="text"  class="form-control" placeholder="请输入书名" v-model="Book.title" required autofocus >
                     <label class="sr-only">作者</label>
-                    <input type="text"  class="form-control" placeholder="请输入作者（不得超过20字符）"  v-model="Book.writer" required autofocus>
+                    <input type="text"  class="form-control" placeholder="请输入作者"  v-model="Book.writer" required autofocus>
                     <label class="sr-only">库存</label>
                     <input type="text" class="form-control" placeholder="请输入库存"  v-model="Book.inventory" required autofocus>
                     <label  class="sr-only">ISBN</label>
@@ -82,6 +82,9 @@
                     group:""
                 }
             }
+        },
+        created(){
+            this.$store.dispatch('Books/getBooks');
         },
         methods:{
           detail(index) {

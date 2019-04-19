@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div  style="display: flex;width: 100%;justify-content: space-around;">
+        <div  v-if="!modify" style="display: flex;width: 100%;justify-content: space-around;">
             <img v-bind:src="a.image">
             <div style="display: flex;flex-direction: column;justify-content: center;width:60%">
                 <h3>{{a.title}}</h3>

@@ -28,12 +28,16 @@
     import {mapState} from 'vuex'
     export default {
         name: "Cart",
+
         methods:{
             buy(){
                 this.$store.commit('Orders/addOrder',this.carts);
                 this.$store.commit('Books/buyBooks',this.carts);
                 this.$store.commit('Cart/clear');
             }
+        },
+        created(){
+            this.$store.dispatch('Orders/getOrders');
         },
         computed:{
             check0(){

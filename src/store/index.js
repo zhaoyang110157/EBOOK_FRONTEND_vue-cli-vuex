@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import Axios from 'axios'
 import Cart from './modules/Cart'
 import Person from './modules/Person'
 import Books from './modules/Books'
@@ -11,6 +11,6 @@ export default new Vuex.Store({
         Cart,
         Person,
         Books,
-        Orders
+        Orders,
     },
 })

@@ -49,6 +49,9 @@
                 this.type = s;
             }
         },
+        created(){
+            this.$store.dispatch('Books/getBooks');
+        },
         computed:{
             book() {
                 let type = this.type

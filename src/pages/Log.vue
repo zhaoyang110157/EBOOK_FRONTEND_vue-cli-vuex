@@ -56,27 +56,11 @@
             }
         },
         created(){
-            this.getPhotos();
+            this.$store.dispatch('Person/getUsers');
         },
         methods:{
-            async getPhotos () {
-                // 这里用try catch包裹，请求失败的时候就执行catch里的
-                this.$ajax({
-                    methods:'get',
-                    url:'http://localhost:8000/serv_war_exploded/Servlet',
-                    params:{},
-                    dataType: 'jsonp',
-                    crossDomain: true,
-                }
-                ).then(function (response) {
-                    console.log(response);
-                })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                },
-            url1(){
 
+            url1(){
                 for (let index =0;index<this.users.length;index++ ) {
                     let user = this.users[index];
                     if (this.SignIn.account === user.account )
