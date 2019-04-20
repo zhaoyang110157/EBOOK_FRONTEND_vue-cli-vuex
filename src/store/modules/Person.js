@@ -8,22 +8,24 @@ const state ={
 
 const actions = {
     getUsers(context){
-        Axios.get('http://localhost:8000/serv_war_exploded/Users')
+        Axios.get('api//Users')
             .then((res)=>{
                 context.commit('getUsers',res);
             })
     },
     changeAllow(context,index){
         console.log(index);
-
-        let data = new FormData();
-        data.append("account",state.users[index].account)
-        let allowed = (state.users[index].allowed)? 0:1; console.log(state.users[index].account + "\n"+allowed)
-        data.append("allowed",allowed)
-        Axios.post('http://localhost:8000/serv_war_exploded/Users',data)
+        let account = state.users[index].account;
+        let allowed = (state.users[index].allowed)? 0:1;
+        console.log(state.users[index].account + "\n"+allowed)
+        Axios.post('api/Users',
+            {
+                    "account":account,"allowed":allowed
+            }
+    )
             .then((res)=>{
                 context.commit('changeAllow',index)
-                console.log("message");
+                console.log("message  " +res.data.target);
             });
 
     }

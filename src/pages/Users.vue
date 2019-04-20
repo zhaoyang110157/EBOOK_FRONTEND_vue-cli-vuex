@@ -23,7 +23,7 @@
         name: "Users",
         methods:{
           changeAllow(index) {
-              this.$store.commit('Person/changeAllow',index);
+              this.$store.dispatch('Person/changeAllow',index);
           }
         },
         computed: {
