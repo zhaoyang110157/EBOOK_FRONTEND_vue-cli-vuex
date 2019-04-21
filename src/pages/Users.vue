@@ -23,6 +23,7 @@
         name: "Users",
         methods:{
           changeAllow(index) {
+              this.$store.dispatch('Person/getUsers',index);
               this.$store.dispatch('Person/changeAllow',index);
           }
         },

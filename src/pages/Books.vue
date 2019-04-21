@@ -16,7 +16,7 @@
                 <ul v-if="layout == 'grid'" class="grid">
                     <!-- 这种布局只显示缩略图片不显示文字 -->
                     <li v-for="(a,index) in books" :key="index">
-                        <img v-bind:src="a.image" alt="查看详情" @click="detail(a)"/>
+                        <img v-bind:src="a.image" alt="查看详情" @click="detail(a,index)"/>
                     </li>
                 </ul>
 
@@ -28,36 +28,64 @@
                             <div style="margin-top: 20px; width: 400px">
                                 <h3>{{a.title}}</h3>
                                 <h5>售价：  {{a.price}}  元</h5>
-                                <h5 @click="detail(a)">详情……</h5>
+                                <h5 @click="detail(a,index)">详情……</h5>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
             <div v-else>
-                <form   class="form-signin" onsubmit="return addBook();">
-                    <label  class="sr-only">书名</label>
-                    <input type="text"  class="form-control" placeholder="请输入书名" v-model="Book.title" required autofocus >
-                    <label class="sr-only">作者</label>
-                    <input type="text"  class="form-control" placeholder="请输入作者"  v-model="Book.writer" required autofocus>
-                    <label class="sr-only">库存</label>
-                    <input type="text" class="form-control" placeholder="请输入库存"  v-model="Book.inventory" required autofocus>
-                    <label  class="sr-only">ISBN</label>
-                    <input type="text"  class="form-control" placeholder="请输入ISBN"  v-model="Book.ISBN" required autofocus >
-                    <label  class="sr-only">分类</label>
-                    <input type="text"  class="form-control" placeholder="请输入分类"  v-model="Book.group" required autofocus >
-                    <label  class="sr-only">价格</label>
-                    <input type="text"  class="form-control"  placeholder="请输入价格" v-model="Book.price" required autofocus >
+                <form   class="form-check " style="display: flex;flex-direction: column;justify-content: center;width:60%; margin-left: 150px">
+                    <div class="input-group">
+                        <label class="col-sm-2 control-label" for="title">书名</label>
+                        <div class="col-md-10">
+                            <input type="text" id="title" class="form-control" placeholder="请输入标题" v-model="Book.title" required autofocus >
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-sm-2 control-label" for="writer">作者</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="writer" class="form-control" placeholder="请输入作者" v-model="Book.writer" required autofocus >
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-sm-2 control-label" for="inventory">库存</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="inventory" class="form-control" placeholder="请输入库存" v-model="Book.inventory" required autofocus >
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-sm-2 control-label" for="price">价格</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="price" class="form-control" placeholder="请输入价格" v-model="Book.price" required autofocus >
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-sm-2 control-label" for="tranch">种类</label>
+                        <div class="col-sm-10">
+                            <label id ="tranch" style="margin-left: 30px"> 
+                                <input  style="margin-left: 15px" type="radio" name="DoorCt" value="literature" v-model="Book.tranch">literature
+                                <input style="margin-left: 15px"  type="radio" name="DoorCt" value="magazine" v-model="Book.tranch">magazine
+                                <input  style="margin-left: 15px" type="radio" name="DoorCt" value="science"  v-model="Book.tranch">science
+                            </label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="col-sm-2 control-label" for="isbn">ISBN</label>
+                        <div class="col-sm-10">
+                            <input type="text" id="isbn" class="form-control" placeholder="请输入ISBN" v-model="Book.ISBN" required autofocus >
+                        </div>
+                    </div>
                     <label  class="sr-only">简介</label>
                     <el-input
                             type="textarea"
                             :autosize="{ minRows: 2, maxRows: 5}"
-                            placeholder="请输入简介（不得超过1000字符）"
-                            v-model="Book.intro" required autofocus>
+                            placeholder="请输入简介"
+                            v-model="Book.introduction" required autofocus>
                     </el-input>
-
-                    <button class="btn btn-group-lg btn-primary btn-block" type="submit" style="margin-top: 20px" >确认添加</button>
+                    <button class="btn btn-group-lg btn-primary btn-block" style="margin-top: 20px"  @click="book_added(Book)">确认添加</button>
                 </form>
+
             </div>
         </form>
     </div>
@@ -78,8 +106,8 @@
                     price:"",
                     inventory:"",
                     ISBN:"",
-                    intro:"",
-                    group:""
+                    introduction:"",
+                    tranch:""
                 }
             }
         },
@@ -91,10 +119,10 @@
               this.$store.commit('Books/changeAim', index);
               this.$router.push('/Book');
           },
-            book_added(){
-                this.$store.commit('Books/addBook',this.Book);
-                this.add_book = !this.add_book;
-                //this.Book.title = this.Book.writer = this.Book.inventory = this.Book.ISBN = this.Book.intro = "";
+            book_added(Book){
+              this.$store.dispatch('Books/addBook',Book)
+              this.add_book = !this.add_book;
+
           }
         },
         computed: {
@@ -102,15 +130,7 @@
                 books: state => state.Books.books,
                 isManager: state => state.Person.isManager
             })
-        },
-        mounted() {
-            window.addBook = ()=>{
-                this.book_added();/*
-                   * 这里的this，指向的是Vue实例，并不是window，
-                   * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
-                   */
-            }
-        },
+        }
     }
 </script>
 

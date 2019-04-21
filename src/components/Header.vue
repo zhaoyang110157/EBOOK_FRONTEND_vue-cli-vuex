@@ -25,12 +25,12 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" v-if="this.$store.state.Person.isManager" to="/Users">
-                        <button type="button" class="btn btn-default btn-lg">
-                        <span class="iconfont icon-manage"></span>
-                        Users
-                    </button>
-                    </router-link>
+                    <div class="nav-link" v-if="this.$store.state.Person.isManager" >
+                        <button type="button" class="btn btn-default btn-lg" @click="manage">
+                            <span class="iconfont icon-manage"></span>
+                            Users
+                        </button>
+                    </div>
                     <router-link class="nav-link" v-else to="/Cart">
                         <button type="button" class="btn btn-default btn-lg">
                         <span class="iconfont icon-cart"></span>
@@ -95,6 +95,10 @@
                 this.$router.push('/Home');
                 this.$forceUpdate();
             },
+            manage(){
+                this.$store.dispatch('Person/getUsers');
+                this.$router.push('/Users');
+            }
         },
         computed:{
             ...mapState({

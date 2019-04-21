@@ -1,0 +1,6 @@
+前端 (Vue-cli + Vuex + Axios)
+编写的过程中遇到的问题和解决办法
+1、form _ submit
+2、access-control-allow-origin 
+3、参数向后端传输
+4、前后端的数据形式不同？ “change”前后传输不同，类型建议使用数字来区分或者enum

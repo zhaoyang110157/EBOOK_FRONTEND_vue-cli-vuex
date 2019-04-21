@@ -17,7 +17,7 @@
             <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="button" @click="up=!up">Log up</button>
         </form>
 
-        <form   v-show="up" class="form-signin" onsubmit="return upClick();">
+        <div   v-show="up" class="form-signin" >
             <h1 class="h3 mb-6 font-weight-bold">please sign up</h1>
             <label for="inputEmail" class="sr-only">Account</label>
             <input type="text"  class="form-control" v-model="SignUp.account" placeholder="Account" required autofocus >
@@ -27,9 +27,9 @@
             <input type="password" class="form-control" v-model="SignUp.confirm_password" placeholder="Confirm Password" required autofocus>
             <label for="inputPassword" class="sr-only">E-mail</label>
             <input type="email"  class="form-control" v-model="SignUp.email" placeholder="E-mail" required autofocus >
-            <button class="btn btn-group-lg btn-primary btn-block" type="submit" >Log up</button>
-            <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="submit" @click="up=!up">Back</button>
-        </form>
+            <button class="btn btn-group-lg btn-primary btn-block" type="submit" @click="url2" >Log up</button>
+            <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="button" @click="up=!up">Back</button>
+        </div>
     </div>
 
 
@@ -44,10 +44,10 @@
             return {
                 up:false,
                 SignUp: {
-                    account: '',
-                    password: '',
-                    confirm_password: '',
-                    email: '',
+                    account: '111',
+                    password: '123',
+                    confirm_password: '123',
+                    email: '123@qq',
                 },
                 SignIn: {
                     account: '',
@@ -125,20 +125,21 @@
                     role:'custom'
                 }
                 this.$store.commit('Person/changeLogin',this.users.length);
-                this.$store.commit('Person/addUser',user);
+                this.$store.dispatch('Person/addUser',user);
                 this.$router.push('/Home');
             }
         },
         mounted() {
-            window.inClick = ()=>{
+            window.upClick = ()=>{
+                this.url2();
+            },
+                window.inClick = ()=>{
                 this.url1();/*
                    * 这里的this，指向的是Vue实例，并不是window，
                    * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
                    */
-            },
-                window.upClick = ()=>{
-                this.url2();
             }
+
         },
         computed: {
             ...mapState({
