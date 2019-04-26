@@ -21,7 +21,7 @@ const actions = {
         console.log(state.users[index].account + "\n" + allowed)
         Axios.post('api/Users',
             {
-                "type":"change","account": account, "allowed": allowed
+                "type":1,"account": account, "allowed": allowed
             }
         ).then((res) => {
                 context.commit('changeAllow', index)
@@ -34,18 +34,21 @@ const actions = {
         let password = user.password;
         Axios.post('api/Users',
             {
-                "type":"add","account":account,"allowed":1,"password":password,"role":"custom"
+                "type":0,"account":account,"allowed":1,"password":password,"role":"custom"
             }
         ).then((res)=> {
             console.log("  add user");
             console.log(res);
         })
-    }
+    },
 }
 const mutations = {
     getUsers(state,res){
       state.users = res.data.users;
       console.log(res);
+    },
+    getUser(state,index){
+        return state.users[index].account
     },
     changeManager (state,is) {
         state.isManager = is;

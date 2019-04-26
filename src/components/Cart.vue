@@ -31,9 +31,14 @@
 
         methods:{
             buy(){
-                this.$store.commit('Orders/addOrder',this.carts);
-                this.$store.commit('Books/buyBooks',this.carts);
+                console.log(1);
+                this.$store.commit('Orders/setAccount',this.users[this.isLogin].account);
+                this.$store.commit('Orders/buyBooks',this.carts);
+                console.log(1);
                 this.$store.commit('Cart/clear');
+                console.log(1);
+                this.$store.dispatch('Books/getBooks')
+                console.log(1);
             }
         },
         created(){
@@ -47,7 +52,8 @@
             },
             ...mapState({
                 carts: state => state.Cart.carts,
-                isLogin : state => state.Person.isLogin
+                isLogin : state => state.Person.isLogin,
+                users : state => state.Person.users
             })
         },
         watch:{

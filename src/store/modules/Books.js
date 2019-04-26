@@ -69,12 +69,6 @@ const mutations = {
     },
     addBook (state, book) {
         state.books.push(book)
-    },
-    buyBooks( state,cart){
-        for(let i = 0 ; i<cart.length;i++){let j=0;
-            for(; j<state.books.length && state.books[j].title != cart[i].title;j++) ;
-            state.books[j].inventory -= cart[i].inventory;
-        }
     }
 };
 
