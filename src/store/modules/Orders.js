@@ -8,8 +8,11 @@ const state ={
 
 const actions = {
     getOrders(context){
-        Axios.get('http://localhost:8000/serv_war_exploded/Orders')
-            .then((res)=>{
+        Axios.get('api/Orders',{
+            params:{
+                account:state.account
+            }
+        }).then((res)=>{
                 context.commit('getOrders',res);
             })
     }
@@ -51,7 +54,7 @@ const mutations = {
             console.log(state.account)
 
 
-            
+
             Axios.post( 'api/Orders',
                     {
                         "type":0,"title":title,"inventory":inventory

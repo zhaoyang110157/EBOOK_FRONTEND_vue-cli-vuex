@@ -8,7 +8,7 @@ const state ={
 
 const actions = {
     getUsers(context){
-        Axios.get('api//Users')
+        Axios.get('api/Users')
             .then((res)=>{
                 context.commit('getUsers',res);
                 console.log("getUSer  ");
