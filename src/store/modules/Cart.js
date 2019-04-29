@@ -1,12 +1,5 @@
 const state ={
     carts:[
-        {
-            "title": "挪威的森林",
-            "bid": 0,
-            "image":  "./image/nuowei.jpg",
-            "inventory":"5",
-            "price":"50"
-        }
     ]
 };
 

@@ -15,7 +15,7 @@
             style="margin-left: 25%;width:50%;">
             </el-date-picker>
         </div>
-        <ul v-if="isLogin!==-1">
+        <ul v-if="isLogin!==-1" style="margin-left: 25%;width:50%;margin-top: 10px">
             <li v-for="(a,index) in searchOrder" :key="index"  style="list-style-type: none">
                 <div style="display: flex;width: 100%;justify-content: space-around;">
                     <img v-bind:src="a.image" style="height: 70px">
@@ -66,6 +66,7 @@
                 value:0,
                 value1: '',
                 value2:'',
+                time:''
             };
         },
         created(){
