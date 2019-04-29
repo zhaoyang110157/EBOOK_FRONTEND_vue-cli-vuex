@@ -27,9 +27,10 @@ const actions = {
         let inventory = book.inventory;
         let tranch = book.tranch;
         let introduction = book.introduction;
+        let bid = state.books.length;
         Axios.post('api/Books',
             {
-                "type":0,"title":title,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
+                "type":0,"title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
         ).then((res) => {
             context.commit('changeInf',book)

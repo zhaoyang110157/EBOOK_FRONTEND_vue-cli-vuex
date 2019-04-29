@@ -114,7 +114,8 @@
                         })
                         if(!idExist){
                             let cart = {
-                                title : b.title,
+                                title: b.title,
+                                bid : b.bid,
                                 image : b.image,
                                 inventory : a,
                                 price : b.price

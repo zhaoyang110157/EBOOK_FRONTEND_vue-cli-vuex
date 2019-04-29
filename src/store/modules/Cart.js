@@ -1,7 +1,8 @@
 const state ={
     carts:[
         {
-            "title": "挪威的森林 【电影特别版】",
+            "title": "挪威的森林",
+            "bid": 0,
             "image":  "./image/nuowei.jpg",
             "inventory":"5",
             "price":"50"
@@ -19,7 +20,7 @@ const mutations = {
         state.carts.push(user)
     },
     delCart(state,index){
-        state.carts.splice(index,1);
+       state.carts.splice(index,1);
     }
 };
 

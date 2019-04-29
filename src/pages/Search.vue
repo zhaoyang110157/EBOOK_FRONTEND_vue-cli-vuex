@@ -59,7 +59,7 @@
                     return this.books
                 else
                     return this.books.filter(function (number) {
-                        return number.group === type
+                        return number.tranch === type
                     })
             },
             searchData(){

@@ -44,10 +44,10 @@
             return {
                 up:false,
                 SignUp: {
-                    account: '111',
-                    password: '123',
-                    confirm_password: '123',
-                    email: '123@qq',
+                    account: '',
+                    password: '',
+                    confirm_password: '',
+                    email: '',
                 },
                 SignIn: {
                     account: '',
@@ -66,7 +66,7 @@
                     if (this.SignIn.account === user.account )
                         if(this.SignIn.password === user.password) {
                             if (user.allowed) {
-                                this.$store.commit('Person/changeLogin', index);
+                                this.$store.commit('Person/changeLogin', user.id);
                                 if (user.role === "manager") this.$store.commit('Person/changeManager', true);
                                 this.$message({
                                     message:'登陆成功',
@@ -75,7 +75,7 @@
                                     showClose: true
                                 })
                                 this.$router.push('/Home');
-                                break
+                                return true;
                             } else {
                                 this.$message({
                                     message:'用户已被禁用',

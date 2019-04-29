@@ -34,7 +34,7 @@ const actions = {
         let password = user.password;
         Axios.post('api/Users',
             {
-                "type":0,"account":account,"allowed":1,"password":password,"role":"custom"
+                "type":0,"account":account,"allowed":1,"password":password,"role":"custom","id":state.isLogin
             }
         ).then((res)=> {
             console.log("  add user");

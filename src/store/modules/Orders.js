@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 const state ={
-    account: '',
+    id:0,
     order:[
     ]
 };
@@ -10,7 +10,7 @@ const actions = {
     getOrders(context){
         Axios.get('api/Orders',{
             params:{
-                account:state.account
+                id:state.id
             }
         }).then((res)=>{
                 context.commit('getOrders',res);
@@ -28,16 +28,13 @@ const mutations = {
         }
     },
     setAccount(state,account){
-        state.account = account;
+        state.id = account;
     },
     buyBooks( state,cart){
         for(let i = 0 ; i<cart.length;i++){
-            let title = cart[i].title
-            let inventory = cart[i].inventory
-            let image = cart[i].image;
-            let price = cart[i].price
+            let bid = cart[i].bid;
+            let inventory = cart[i].inventory;
                 var date = new Date();
-                var seperator1 = "-";
                 var year = date.getFullYear();
                 var month = date.getMonth() + 1;
                 var day = date.getDate();
@@ -51,24 +48,24 @@ const mutations = {
                 clock +="00";
             let time = parseInt(clock);
             console.log(clock)
-            console.log(state.account)
-
+            console.log(state.id)
+            console.log(time)
 
 
             Axios.post( 'api/Orders',
                     {
-                        "type":0,"title":title,"inventory":inventory
+                        "type":0,"bid":bid,"inventory":inventory
                     }
                 ).then((res) => {
-                    console.log('buyBook '+ title)
+                    console.log('buyBook '+ res)
                 }
                 )
             Axios.post( 'api/Orders',
                 {
-                 "type":1,"title":title,"price":price,"inventory":inventory,"acount":state.account,"time":time
+                 "type":1,"bid":bid,"inventory":inventory,"id":state.id,"time":time
                 }
             ).then((res) => {
-                    console.log('buyBook '+ title)
+                    console.log('buyBook '+ res)
                 }
             )
         }
