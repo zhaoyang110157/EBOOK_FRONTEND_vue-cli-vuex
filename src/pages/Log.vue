@@ -61,6 +61,11 @@
         methods:{
 
             url1(){
+                this.Axios.get('api/Users')
+                    .then((res)=>{
+                        context.commit('getUsers',res);
+                        console.log("getUSer  ");
+                    })
                 for (let index =0;index<this.users.length;index++ ) {
                     let user = this.users[index];
                     if (this.SignIn.account === user.account )
