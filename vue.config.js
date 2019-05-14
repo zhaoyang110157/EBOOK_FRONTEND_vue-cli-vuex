@@ -97,7 +97,7 @@ module.exports = {
         proxy: {
             "/api": {
                 //代理路径 例如 https://baidu.com
-                target:  "http://localhost:8000/serv_war_exploded",
+                target:  "http://localhost:8000/",
                 // 将主机标头的原点更改为目标URL
                 changeOrigin: true,
                 ws: true,

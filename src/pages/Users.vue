@@ -27,6 +27,9 @@
               this.$store.dispatch('Person/changeAllow',index);
           }
         },
+        create(){
+            this.$store.dispatch('Person/getUsers');
+        },
         computed: {
             ...mapState({
                 users: state => state.Person.users,

@@ -55,24 +55,37 @@
                 }
             }
         },
-        created(){
-            this.$store.dispatch('Person/getUsers');
-        },
         methods:{
 
             url1(){
-                this.Axios.get('api/Users')
+                this.Axios.post('api/users/signIn',{
+                    "account": this.SignIn.account, "password":this.SignIn.password
+                })
                     .then((res)=>{
-                        context.commit('getUsers',res);
-                        console.log("getUSer  ");
-                    })
-                for (let index =0;index<this.users.length;index++ ) {
-                    let user = this.users[index];
-                    if (this.SignIn.account === user.account )
-                        if(this.SignIn.password === user.password) {
-                            if (user.allowed) {
-                                this.$store.commit('Person/changeLogin', user.id);
-                                if (user.role === "manager") this.$store.commit('Person/changeManager', true);
+                        let num = res.data.num;
+                        let isManager = res.data.isManager;
+                        switch (num){
+                            case -1://forbid
+                                this.$message({
+                                    message:'用户已被禁用',
+                                    type: 'error',
+                                    duration: 1000,
+                                    showClose: true
+                                })
+                                return false;
+                                break;
+                            case -2://nobody
+                                this.$message({
+                                    message:'错误的用户名或密码',
+                                    type: 'warning',
+                                    duration: 1000,
+                                    showClose: true
+                                })
+                                return false;
+                                break;
+                            default: //allowed
+                                this.$store.commit('Person/changeLogin', num);
+                                this.$store.commit('Person/changeManager', isManager);
                                 this.$message({
                                     message:'登陆成功',
                                     type: 'success',
@@ -80,39 +93,11 @@
                                     showClose: true
                                 })
                                 this.$router.push('/Home');
-                                return true;
-                            } else {
-                                this.$message({
-                                    message:'用户已被禁用',
-                                    type: 'error',
-                                    duration: 1000,
-                                    showClose: true
-                                })
-                                return false
-                            }
-                        }
-                }
-                if(this.isLogin === -1)
 
-                    this.$message({
-                        message:'错误的用户名或密码',
-                        type: 'warning',
-                        duration: 1000,
-                        showClose: true
+                        }
                     })
             },
             url2(){
-                for (let user of this.users) {
-                    if (this.SignUp.account === user.account ){
-                        this.$message({
-                            message:'用户名已存在',
-                            type: 'warning',
-                            duration: 1000,
-                            showClose: true
-                        })
-                        return;
-                    }
-                }
                 if(this.SignUp.password !== this.SignUp.confirm_password)
                 {
                     this.$message({
@@ -123,16 +108,33 @@
                     })
                     return;
                 }
-                let user={
-                    account: this.SignUp.account,
-                    password: this.SignUp.password,
-                    allowed: true,
-                    role:'custom'
-                }
-                this.$store.commit('Person/changeLogin',this.users.length);
-                this.$store.dispatch('Person/addUser',user);
-                this.$router.push('/Home');
-            }
+                this.Axios.post('api/users/signUp',
+                    {
+                        "account":this.SignUp.account,"allowed":1,"password":this.SignUp.password,"role":"custom"
+                    }
+                ).then((res)=> {
+                    if(res) {
+                        let user=
+                            {
+                                account: this.SignUp.account,
+                                password: this.SignUp.password,
+                                allowed: true,
+                                role:'custom'
+                            }
+                        this.$store.commit('Person/changeLogin',this.users.length);
+                        this.$store.dispatch('Person/addUser',user);
+                        this.$router.push('/Home');
+                    }
+                    else {
+                        this.$message({
+                            message:'用户名已存在',
+                            type: 'warning',
+                            duration: 1000,
+                            showClose: true
+                        })
+                        return;
+                    }
+                })
         },
         mounted() {
             window.upClick = ()=>{

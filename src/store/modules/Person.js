@@ -8,7 +8,7 @@ const state ={
 
 const actions = {
     getUsers(context){
-        Axios.get('api/Users')
+        Axios.get('api/Users/getUsers')
             .then((res)=>{
                 context.commit('getUsers',res);
                 console.log("getUSer  ");
@@ -19,28 +19,16 @@ const actions = {
         let account = state.users[index].account;
         let allowed = (state.users[index].allowed) ? 0 : 1;
         console.log(state.users[index].account + "\n" + allowed)
-        Axios.post('api/Users',
+        Axios.post('api/Users/changeAllow',
             {
-                "type":1,"account": account, "allowed": allowed
+                "account": account, "allowed": allowed
             }
         ).then((res) => {
                 context.commit('changeAllow', index)
                 console.log("message  " + res.data.target);
             });
-    },
-    addUser(context,user){
-        context.commit('addUser', user)
-        let account = user.account;
-        let password = user.password;
-        Axios.post('api/Users',
-            {
-                "type":0,"account":account,"allowed":1,"password":password,"role":"custom","id":state.isLogin
-            }
-        ).then((res)=> {
-            console.log("  add user");
-            console.log(res);
-        })
-    },
+    }
+
 }
 const mutations = {
     getUsers(state,res){

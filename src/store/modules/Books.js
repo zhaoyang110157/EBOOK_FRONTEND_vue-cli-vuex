@@ -13,7 +13,7 @@ const state ={
 
 const actions = {
     getBooks(context){
-        Axios.get('api/Books')
+        Axios.get('api/Books/getBooks')
             .then((res)=>{
                 context.commit('getBooks',res);
             })
@@ -28,9 +28,9 @@ const actions = {
         let tranch = book.tranch;
         let introduction = book.introduction;
         let bid = state.books.length;
-        Axios.post('api/Books',
+        Axios.post('api/Books/changeInf',
             {
-                "type":0,"title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
+               "title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
         ).then((res) => {
             context.commit('changeInf',book)
@@ -46,9 +46,9 @@ const actions = {
         let inventory = book.inventory;
         let tranch = book.tranch;
         let introduction = book.introduction;
-        Axios.post('api/Books',
+        Axios.post('api/Books/addBook',
             {
-                "type":1,"title":title,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
+                "title":title,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
         ).then((res) => {
             context.commit('addBook',book)
