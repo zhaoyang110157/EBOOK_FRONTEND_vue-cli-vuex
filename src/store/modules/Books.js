@@ -13,9 +13,9 @@ const state ={
 
 const actions = {
     getBooks(context){
-        Axios.get('api/Books/getBooks')
+        Axios.get('api/Books/getAll')
             .then((res)=>{
-                context.commit('getBooks',res);
+                context.commit('getAll',res);
             })
     },
     changeInf(context,book) {
@@ -29,8 +29,7 @@ const actions = {
         let introduction = book.introduction;
         let bid = state.books.length;
         Axios.post('api/Books/changeInf',
-            {
-               "title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
+            {"title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
         ).then((res) => {
             context.commit('changeInf',book)

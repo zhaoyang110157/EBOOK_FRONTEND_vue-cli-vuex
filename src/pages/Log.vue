@@ -62,8 +62,11 @@
                     "account": this.SignIn.account, "password":this.SignIn.password
                 })
                     .then((res)=>{
-                        let num = res.data.num;
-                        let isManager = res.data.isManager;
+                        let num = res.id;
+                        let isManager =1;
+                        if(res.role = "custom") isManager = 0;
+                        let account = res.account
+
                         switch (num){
                             case -1://forbid
                                 this.$message({
@@ -86,6 +89,7 @@
                             default: //allowed
                                 this.$store.commit('Person/changeLogin', num);
                                 this.$store.commit('Person/changeManager', isManager);
+                                this.$store.commit('Person/addUser',res);
                                 this.$message({
                                     message:'登陆成功',
                                     type: 'success',
@@ -110,19 +114,11 @@
                 }
                 this.Axios.post('api/users/signUp',
                     {
-                        "account":this.SignUp.account,"allowed":1,"password":this.SignUp.password,"role":"custom"
+                        "account":this.SignUp.account,"allowed":1,"password":this.SignUp.password,"role":"custom","id":0,
                     }
                 ).then((res)=> {
                     if(res) {
-                        let user=
-                            {
-                                account: this.SignUp.account,
-                                password: this.SignUp.password,
-                                allowed: true,
-                                role:'custom'
-                            }
-                        this.$store.commit('Person/changeLogin',this.users.length);
-                        this.$store.dispatch('Person/addUser',user);
+                        this.$store.commit('Person/changeLogin',res);
                         this.$router.push('/Home');
                     }
                     else {

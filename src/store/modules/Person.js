@@ -47,6 +47,11 @@ const mutations = {
     addUser (state, user) {
         state.users.push(user)
     },
+    signout(state){
+        state.isManager = -1;
+        state.isLogin = -1;
+        state.users.splice(0);
+    },
     changeAllow (state, index) {
         state.users[index].allowed = !state.users[index].allowed;
         console.log(state.users[index].account)

@@ -90,8 +90,7 @@
         },
         methods:{
             signout(){
-                this.$store.commit('Person/changeManager',false);
-                this.$store.commit('Person/changeLogin',-1);
+                this.$store.commit('Person/signout');
                 this.$router.push('/Home');
                 this.$forceUpdate();
             },
