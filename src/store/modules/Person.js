@@ -16,15 +16,15 @@ const actions = {
     },
     changeAllow(context,index) {
         console.log(index);
-        let account = state.users[index].account;
+        let is = state.users[index].id;
         let allowed = (state.users[index].allowed) ? 0 : 1;
         console.log(state.users[index].account + "\n" + allowed)
         Axios.post('api/Users/changeAllow',
             {
-                "account": account, "allowed": allowed
+                "id": is, "allowed": allowed
             }
         ).then((res) => {
-                context.commit('changeAllow', index)
+                context.commit('changeAllow',is)
                 console.log("message  " + res.data.target);
             });
     }
@@ -52,7 +52,7 @@ const mutations = {
         state.isLogin = -1;
         state.users.splice(0);
     },
-    changeAllow (state, index) {
+    changeAllow (state,index) {
         state.users[index].allowed = !state.users[index].allowed;
         console.log(state.users[index].account)
     }

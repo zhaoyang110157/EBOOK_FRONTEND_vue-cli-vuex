@@ -58,7 +58,7 @@
         methods:{
 
             url1(){
-                this.Axios.post('api/users/signIn',{
+                this.Axios.post('api/Users/signIn',{
                     "account": this.SignIn.account, "password":this.SignIn.password
                 })
                     .then((res)=>{

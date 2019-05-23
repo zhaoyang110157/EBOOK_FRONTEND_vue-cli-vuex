@@ -9,8 +9,8 @@ const mutations = {
     clear(state){
         state.carts.splice(0);
     },
-    addCart(state, user) {
-        state.carts.push(user)
+    addCart(state, cartitem) {
+        state.carts.push(cartitem)
     },
     delCart(state,index){
        state.carts.splice(index,1);
