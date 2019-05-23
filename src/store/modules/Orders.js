@@ -52,8 +52,6 @@ const mutations = {
                 console.log('buyBook '+ res)
             }
             )
-
-        }
     }
 };
 
