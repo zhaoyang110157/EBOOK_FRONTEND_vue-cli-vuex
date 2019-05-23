@@ -15,18 +15,23 @@
             style="margin-left: 25%;width:50%;">
             </el-date-picker>
         </div>
-        <ul v-if="isLogin!==-1" style="margin-left: 25%;width:50%;margin-top: 10px">
-            <li v-for="(a,index) in searchOrder" :key="index"  style="list-style-type: none">
-                <div style="display: flex;width: 100%;justify-content: space-around;">
-                    <img v-bind:src="a.image" style="height: 70px">
-                    <div style="display: flex;flex-direction: column;justify-content: center;width:60%">
-                        <h3>{{a.title}}</h3>
-                        <h5>售价：{{a.price}}  元  数量： {{a.inventory}}</h5>
-                        <h5>购买时间： {{a.time}}</h5>
+        <div v-if="isLogin!==-1" style="margin-left: 25%;width:50%;margin-top: 10px">
+            <hr>
+            <h5>购买时间： {{a.time}}</h5>
+            <ul >
+                <li v-for="(a,index) in searchOrder.orderitem" :key="index"  style="list-style-type: none">
+                    <div style="display: flex;width: 100%;justify-content: space-around;">
+                        <img v-bind:src="a.image" style="height: 70px">
+                        <div style="display: flex;flex-direction: column;justify-content: center;width:60%">
+                            <h3>{{a.title}}</h3>
+                            <h5>售价：{{a.price}}  元  数量： {{a.inventory}}</h5>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+            <hr>
+        </div>
+
     </div>
 </template>
 
