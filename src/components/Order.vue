@@ -37,7 +37,10 @@
     export default {
         name: "Order",
         props: {
-            order: Array
+            order: {
+                type:Array,
+                required: true
+            }
         },
     }
 </script>
