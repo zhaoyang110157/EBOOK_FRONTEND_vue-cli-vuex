@@ -3,6 +3,7 @@ import Axios from "axios";
 const state ={
     isManager : false,
     isLogin :-1,
+    user: null,
     users: []
 };
 
@@ -51,6 +52,9 @@ const mutations = {
         state.isManager = -1;
         state.isLogin = -1;
         state.users.splice(0);
+    },
+    signin(state,user){
+      state.user = user;
     },
     changeAllow (state,index) {
         state.users[index].allowed = !state.users[index].allowed;

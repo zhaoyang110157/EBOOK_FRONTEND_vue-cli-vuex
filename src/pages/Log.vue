@@ -1,6 +1,6 @@
 <template>
     <div  id="t"  class="text-center">
-        <form class="form-signin" v-show="!up" onsubmit="return inClick();">
+        <div class="form-signin" v-show="!up" >
             <h1 class="h3 mb-6 font-weight-bold">please sign in</h1>
             <label for="inputEmail" class="sr-only">Account</label>
             <input type="text" id="inputEmail" class="form-control" placeholder="Account" v-model="SignIn.account" required autofocus>
@@ -13,9 +13,9 @@
                 </label>
             </div>
             <hr>
-            <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit">Log in</button>
+            <button class="btn btn-group-lg btn-primary btn-block bg-primary" type="submit" @click="url1()">Log in</button>
             <button class="btn btn-group-lg btn-primary btn-block bg-secondary" type="button" @click="up=!up">Log up</button>
-        </form>
+        </div>
 
         <div   v-show="up" class="form-signin" >
             <h1 class="h3 mb-6 font-weight-bold">please sign up</h1>
@@ -36,13 +36,12 @@
 </template>
 
 <script>
-
-    import {mapState} from 'vuex'
+    import {reqLogin,reqSignup} from '../api'
     export default {
         name: "Log",
-        data(){
+        data() {
             return {
-                up:false,
+                up: false,
                 SignUp: {
                     account: '',
                     password: '',
@@ -55,43 +54,41 @@
                 }
             }
         },
-        methods:{
+        methods: {
 
-            url1(){
-                this.Axios.post('api/Users/signIn',{
-                    "account": this.SignIn.account, "password":this.SignIn.password
+            url1() {
+                reqLogin( {
+                    "account": this.SignIn.account, "password": this.SignIn.password
                 })
-                    .then((res)=>{
+                    .then((res) => {
                         let num = res.id;
-                        let isManager =1;
-                        if(res.role = "custom") isManager = 0;
-                        let account = res.account
+                        let isManager = 1;
+                        if (res.role == "custom") isManager = 0;
 
-                        switch (num){
+
+                        switch (num) {
                             case -1://forbid
                                 this.$message({
-                                    message:'用户已被禁用',
+                                    message: '用户已被禁用',
                                     type: 'error',
                                     duration: 1000,
                                     showClose: true
                                 })
                                 return false;
-                                break;
                             case -2://nobody
                                 this.$message({
-                                    message:'错误的用户名或密码',
+                                    message: '错误的用户名或密码',
                                     type: 'warning',
                                     duration: 1000,
                                     showClose: true
                                 })
                                 return false;
-                                break;
                             default: //allowed
                                 this.$store.commit('Person/changeLogin', num);
                                 this.$store.commit('Person/changeManager', isManager);
-                                this.$store.commit('Person/addUser',res);
+                                this.$store.commit('Person/signin',res);
                                 this.$message({
-                                    message:'登陆成功',
+                                    message: '登陆成功',
                                     type: 'success',
                                     duration: 1000,
                                     showClose: true
@@ -101,29 +98,30 @@
                         }
                     })
             },
-            url2(){
-                if(this.SignUp.password !== this.SignUp.confirm_password)
-                {
+            url2() {
+                if (this.SignUp.password !== this.SignUp.confirm_password) {
                     this.$message({
-                        message:'两次密码不相同',
+                        message: '两次密码不相同',
                         type: 'warning',
                         duration: 1000,
                         showClose: true
                     })
                     return;
                 }
-                this.Axios.post('api/users/signUp',
-                    {
-                        "account":this.SignUp.account,"allowed":1,"password":this.SignUp.password,"role":"custom","id":0,
+                reqSignup({
+                        "account": this.SignUp.account,
+                        "allowed": 1,
+                        "password": this.SignUp.password,
+                        "role": "custom",
+                        "id": 0,
                     }
-                ).then((res)=> {
-                    if(res) {
-                        this.$store.commit('Person/changeLogin',res);
+                ).then((res) => {
+                    if (res) {
+                        this.$store.commit('Person/changeLogin', res);
                         this.$router.push('/Home');
-                    }
-                    else {
+                    } else {
                         this.$message({
-                            message:'用户名已存在',
+                            message: '用户名已存在',
                             type: 'warning',
                             duration: 1000,
                             showClose: true
@@ -131,27 +129,11 @@
                         return;
                     }
                 })
-        },
-        mounted() {
-            window.upClick = ()=>{
-                this.url2();
             },
-                window.inClick = ()=>{
-                this.url1();/*
-                   * 这里的this，指向的是Vue实例，并不是window，
-                   * 因为webpack将其vue 的 this 转换成了_this.alert()，相当于_that或者_self
-                   */
-            }
-
-        },
-        computed: {
-            ...mapState({
-                users: state => state.Person.users,
-                isLogin: state => state.Person.isLogin
-            }),
         }
-
     }
+
+
 </script>
 
 <style scoped>

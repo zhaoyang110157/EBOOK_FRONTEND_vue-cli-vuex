@@ -17,16 +17,12 @@
         </div>
         <div v-if="isLogin!==-1" style="margin-left: 25%;width:50%;margin-top: 10px">
             <hr>
-            <h5>购买时间： {{a.time}}</h5>
+            you mother fucker
             <ul >
-                <li v-for="(a,index) in searchOrder.orderitem" :key="index"  style="list-style-type: none">
-                    <div style="display: flex;width: 100%;justify-content: space-around;">
-                        <img v-bind:src="a.image" style="height: 70px">
-                        <div style="display: flex;flex-direction: column;justify-content: center;width:60%">
-                            <h3>{{a.title}}</h3>
-                            <h5>售价：{{a.price}}  元  数量： {{a.inventory}}</h5>
-                        </div>
-                    </div>
+                <li v-for="(a,index) in searchOrder" :key="index"  style="list-style-type: none">
+                    <div>用户名：{{users[a.id].account}}</div>
+                    <div>时间：{{a.time}}</div>
+                    <Order :order="a.orderitems"></Order>
                 </li>
             </ul>
             <hr>
@@ -37,8 +33,10 @@
 
 <script>
     import {mapState} from 'vuex'
+    import Order from "../components/Order";
     export default {
         name: "Orders",
+        components: {Order},
         data() {
             return {
                 pickerOptions: {
@@ -76,36 +74,27 @@
         },
         created(){
             this.$store.commit('Orders/setAccount',this.isLogin);
+            this.$store.dispatch('Books/getBooks')
             this.$store.dispatch('Orders/getOrders');
-        },
-        watch: {
-            value(v) {
-                this.value1= new Date(this.value[0]);
-                this.value1=this.value1.getTime();
-                this.value2= new Date(this.value[1]);
-                this.value2=this.value2.getTime();
-            }
         },
         computed:{
             searchOrder() {
                 let value = this.value;
-               if(value )
-               {
-                   let value1 = this.value1;
-                   let value2 = this.value2;
-                   return this.order.filter(function (number) {
-                       let time =  new Date(number.time)
-                       time = time.getTime()
-                       console.log(time);
-                       return time >= value1 && time <= value2
-                   })
-               }
+                if(value)
+                {
+                    let value1 = this.value1;
+                    let value2 = this.value2;
+                    return this.orders.filter(function (number) {
+
+                    })
+                }
                return this.order;
             },
             ...mapState({
-                order: state => state.Orders.order,
+                orders: state => state.Orders.orders,
                 isLogin : state => state.Person.isLogin,
-                users : state => state.Person.users
+                users : state => state.Person.users,
+                books : state => state.Books.books
             })
         },
     }

@@ -63,7 +63,7 @@
                     <div class="input-group">
                         <label class="col-sm-2 control-label" for="tranch">种类</label>
                         <div class="col-sm-10">
-                            <label id ="tranch" style="margin-left: 30px"> 
+                            <label id ="tranch" style="margin-left: 30px">
                                 <input  style="margin-left: 15px" type="radio" name="DoorCt" value="literature" v-model="Book.tranch">literature
                                 <input style="margin-left: 15px"  type="radio" name="DoorCt" value="magazine" v-model="Book.tranch">magazine
                                 <input  style="margin-left: 15px" type="radio" name="DoorCt" value="science"  v-model="Book.tranch">science

@@ -1,4 +1,5 @@
 import Axios from "axios";
+import {reqGetAllBook} from "../../api";
 
 const state ={
     aim: {},
@@ -12,10 +13,9 @@ const state ={
 
 
 const actions = {
-    getBooks(context){
-        Axios.get('api/Books/getAll')
-            .then((res)=>{
-                context.commit('getAll',res);
+        getBooks({commit}) {
+            reqGetAllBook().then( (data) => {
+                commit('getBooks', data)
             })
     },
     changeInf(context,book) {
@@ -28,12 +28,11 @@ const actions = {
         let tranch = book.tranch;
         let introduction = book.introduction;
         let bid = state.books.length;
-        Axios.post('api/Books/changeInf',
+        Axios.post('api/Book/changeInf',
             {"title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
-        ).then((res) => {
+        ).then(() => {
             context.commit('changeInf',book)
-            console.log(res);
         })
     },
     addBook(context,book) {
@@ -49,16 +48,14 @@ const actions = {
             {
                 "title":title,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
-        ).then((res) => {
+        ).then(() => {
             context.commit('addBook',book)
-            console.log(res);
         })
     },
 }
 const mutations = {
     getBooks(state,res){
-        state.books = res.data.books;
-        console.log(res);
+        state.books = res;
     },
     changeInf(state,index,book){
         state.books[state.aimnum] = book;

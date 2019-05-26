@@ -2,7 +2,7 @@ import Axios from "axios";
 
 const state ={
     id:0,
-    order:[
+    orders:[
     ]
 };
 
@@ -19,8 +19,7 @@ const actions = {
 }
 const mutations = {
     getOrders(state,res){
-        state.order = res.data.orders;
-        console.log(res);
+        state.orders = res.data;
     },
     addOrder(state,carts){
         for(let i=0;i<carts.length ; i++){

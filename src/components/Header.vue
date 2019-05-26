@@ -57,7 +57,7 @@
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>
                                 <div >
-                                    用户名：{{users[isLogin].account}}
+                                    用户名：{{user.account}}
                                 </div>
                             </el-dropdown-item>
                             <el-dropdown-item>
@@ -102,7 +102,7 @@
         computed:{
             ...mapState({
                 isLogin: state=>state.Person.isLogin,
-                users: state=>state.Person.users
+                user: state=>state.Person.user
             })
         }
     }

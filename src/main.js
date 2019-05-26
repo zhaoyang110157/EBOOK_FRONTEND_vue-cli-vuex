@@ -3,9 +3,9 @@ import App from './App.vue'
 
 import router from './router'
 import store from './store'
-import axios from 'axios' //引入axios
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
+import axios from 'axios' //引入axios
 
 Vue.prototype.$ajax=axios //修改Vue的原型属性
 
