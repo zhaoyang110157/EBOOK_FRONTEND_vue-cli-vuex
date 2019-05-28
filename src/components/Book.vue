@@ -114,10 +114,12 @@
                         })
                         if(!idExist){
                             let cart = {
-                                bid : b.bid,
-                                sales : a,
+                                PK: {
+                                    bid: b.bid,
+                                    oid: 0
+                                },
                                 price : b.price,
-                                oid: 0
+                                sales: a
                             }
                             this.$store.commit('Cart/addCart',cart);
                             this.$message({
