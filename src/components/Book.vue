@@ -119,7 +119,7 @@
                                     oid: 0
                                 },
                                 price : b.price,
-                                sales: a
+                                sales: aadf
                             }
                             this.$store.commit('Cart/addCart',cart);
                             this.$message({
