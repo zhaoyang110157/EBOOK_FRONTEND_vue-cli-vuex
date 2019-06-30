@@ -34,7 +34,7 @@
                                 <div v-for="(item, index) in a.orderitems" :key="index" class="">
                                     <div class="row">
                                         <div class="imgbox col-md-2">
-                                            <img v-bind:src="books[item.bid].image" class="img-thumbnail" alt="Responsive image">
+
                                         </div>
                                         <div class="col-md-4">
                                             <div class="name mb-3 mt-3">

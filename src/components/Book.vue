@@ -109,15 +109,8 @@
                             showClose: true
                         })
                     else {
-                        let idExist=this.$store.state.Cart.carts.find((item)=>{
-                            return item.title===b.title
-                        })
-                        if(!idExist){
                             let cart = {
-                                PK: {
-                                    bid: b.bid,
-                                    oid: 0
-                                },
+                                bid: b.bid,
                                 price : b.price,
                                 sales: a
                             }
@@ -128,14 +121,7 @@
                                 duration: 1000,
                                 showClose: true
                             })
-                        }
-                        else
-                            this.$message({
-                                message:'已在购物车中',
-                                type: 'error',
-                                duration: 1000,
-                                showClose: true
-                            })
+
                     }
                 }
                 else

@@ -16,14 +16,14 @@
                 <ul v-if="layout == 'grid'" class="grid">
                     <!-- 这种布局只显示缩略图片不显示文字 -->
                     <li v-for="(a,index) in books" :key="index">
-                        <img v-bind:src="a.image" alt="查看详情" @click="detail(a,index)"/>
+                        <img v-if="a.state" v-bind:src="a.image" alt="查看详情" @click="detail(a,index)"/>
                     </li>
                 </ul>
 
                 <ul v-if="layout == 'list'" class="list">
                     <!-- 这种布局显示小图片和文字 -->
                     <li v-for="(a,index) in books" :key="index">
-                        <div style="display: flex; justify-content: space-around" >
+                        <div v-if="a.state" style="display: flex; justify-content: space-around" >
                             <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
                             <div style="margin-top: 20px; width: 400px">
                                 <h3>{{a.title}}</h3>

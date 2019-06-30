@@ -34,8 +34,8 @@ const mutations = {
         var year = date.getFullYear();
         var month = date.getMonth() + 1;
         var day = date.getDate();
-        var hh = date.getHours();  //时
-        var mm = date.getMinutes(); //分
+        var hh = date.getHours();
+        var mm = date.getMinutes();
         var clock = year;
         if(month < 10)clock += "0";clock += month;
         if(day < 10)clock += "0";clock += day ;
@@ -43,12 +43,18 @@ const mutations = {
         if (mm < 10) clock += '0';clock += mm;
         clock +="00";
         let time = parseInt(clock);
-        Axios.post( 'api/Orders/addOrders',
+        let books = new Array(cart[0].bid)
+        let nums = new Array(cart[0].sales)
+        for(var i = 1 ; i <cart.length ; i++ ){
+            books.push(cart[i].bid);
+            nums.push(cart[i].sales);
+        }
+        Axios.post('api/Orders/addOrders',
             {
-                "id":state.id,"oid":0,"time":time,"orderitems":cart
-            }
+                "id":state.id,"time":time,"books":books,"nums":nums
+        }
+
             ).then((res) => {
-                console.log('buyBook '+ res)
             }
             )
     }

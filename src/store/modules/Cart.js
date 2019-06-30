@@ -1,19 +1,19 @@
 const state ={
-    carts:[
-    ]
+    cart:[
+    ],
 };
 
 
 
 const mutations = {
     clear(state){
-        state.carts.splice(0);
+        state.cart.splice(0);
     },
-    addCart(state, cartitem) {
-        state.carts.push(cartitem)
+    addCart(state, bid) {
+        state.cart.push(bid)
     },
     delCart(state,index){
-       state.carts.splice(index,1);
+       state.cart.splice(index,1);
     }
 };
 

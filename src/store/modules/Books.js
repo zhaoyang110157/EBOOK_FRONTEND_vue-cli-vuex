@@ -52,6 +52,17 @@ const actions = {
             context.commit('addBook',book)
         })
     },
+    deleteBook(context,bid){
+            state.books[bid].state=0
+            Axios.post('api/Books/deleteBook', {
+                    params: {
+                        id: bid
+                    }
+                }
+            ).then(() => {
+                context.commit('addBook',book)
+            })
+    }
 }
 const mutations = {
     getBooks(state,res){

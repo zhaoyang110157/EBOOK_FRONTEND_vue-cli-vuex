@@ -1,12 +1,12 @@
 <template>
     <div >
         <ul v-if="isLogin!==-1">
-            <li v-for="(a,index) in carts" :key="index"  style="list-style-type: none">
+            <li v-for="(a,index) in cart" :key="index"  style="list-style-type: none">
                 <div style="display: flex;width: 100%;justify-content: space-around;">
-                    <img v-bind:src="books[a.PK.bid].image" style="height: 70px">
+                    <img v-bind:src="books[a.bid].image" style="height: 70px">
                     <div style="display: flex;flex-direction: column;justify-content: center;width:60%">
-                        <h3>{{books[a.PK.bid].title}}</h3>
-                        <h5>售价：{{books[a.PK.bid].price}}  元</h5>
+                        <h3>{{books[a.bid].title}}</h3>
+                        <h5>售价：{{books[a.bid].price}}  元</h5>
                     </div>
                     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups" >
                         <div class="btn-group mr-2" role="group" aria-label="First group" style="height: 38px">
@@ -31,8 +31,18 @@
 
         methods:{
             buy(){
+                if(this.cart.length <=0) {
+                    this.$message({
+                        message:'购物车为空',
+                        type: 'error',
+                        duration: 1000,
+                        showClose: true
+                    })
+                    return
+                }
+
                 this.$store.commit('Orders/setAccount',this.isLogin);
-                this.$store.commit('Orders/buyBooks',this.carts);
+                this.$store.commit('Orders/buyBooks',this.cart);
                 this.$store.commit('Cart/clear');
                 this.$store.dispatch('Books/getBooks')
             }
@@ -42,12 +52,12 @@
         },
         computed:{
             check0(){
-                return this.$store.state.Cart.carts.find((item)=>{
-                    return item.inventory===0
+                return this.$store.state.Cart.cart.find((item)=>{
+                    return item.sales===0
                 })
             },
             ...mapState({
-                carts: state => state.Cart.carts,
+                cart: state => state.Cart.cart,
                 isLogin : state => state.Person.isLogin,
                 books : state => state.Books.books
             })
