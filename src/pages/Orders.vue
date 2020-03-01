@@ -33,23 +33,17 @@
                                 </el-row>
                                 <div v-for="(item, index) in a.orderitems" :key="index" class="">
                                     <div class="row">
-                                        <div class="imgbox col-md-2">
-
-                                        </div>
                                         <div class="col-md-4">
                                             <div class="name mb-3 mt-3">
                                                 {{books[item.bid].title}}
                                             </div>
-                                            <div class="author">
-                                                {{books[item.bid].writer}}
-                                            </div>
-                                        </div>
+                                          </div>
                                         <div class="col-md-3 row money">
                                             <div class="col-md-6">
-                                                ×{{item.sales}}
+                                                {{item.sales}}×
                                             </div>
                                             <div class="col-md-6 money">
-                                                {{Math.round(item.price*100)/100}}元
+                                                {{Math.round(item.price*100)/100}}
                                             </div>
                                         </div>
                                     </div>
@@ -69,10 +63,8 @@
 
 <script>
     import {mapState} from 'vuex'
-    import Order from "../components/Order";
     export default {
         name: "Orders",
-        components: {Order},
         data() {
             return {
                 pickerOptions: {

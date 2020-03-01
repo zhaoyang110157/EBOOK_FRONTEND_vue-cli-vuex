@@ -73,6 +73,8 @@
                         v-model="a.introduction" required autofocus>
                 </el-input>
                 <button class="btn btn-group-lg btn-primary btn-block" @click="changeInf(a)"> 确认修改</button>
+                <input type="file" @change="getFile($event)"/>
+                <button @click="upload($event)">提交</button>
             </form>
         </div>
     </div>
@@ -87,6 +89,7 @@
           return {
               num : 0,
               modify: false,
+              File: ''
           }
         },
         methods:{
@@ -132,6 +135,7 @@
                         showClose: true
                     })
             },
+
             changeInf(Book){
                 var radioObj = document.querySelectorAll('.radio');
                 for(var i = 0;i < radioObj.length;i++){
@@ -143,6 +147,22 @@
                 this.a.tranch = Book.tranch;
                 this.$store.dispatch('Books/changeInf',Book)
                 this.modify = !this.modify;
+            },
+
+            getFile(event){
+                this.file = event.target.files[0]
+            },
+
+            upload: function () {
+                event.preventDefault()
+                let formData = new FormData()
+                formData.append('file', this.file)
+                Axios.post('/picture/upload/' + this.bookName, formData,
+                    {headers: {'Content-Type': 'multipart/form-data'}}).then(response => {
+                   console.log(response)
+                }).catch(response => {
+                    console.log(response)
+                })
             }
         } ,
         computed: {

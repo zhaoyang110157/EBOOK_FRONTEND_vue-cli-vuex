@@ -4,8 +4,7 @@ import {reqGetAllBook} from "../../api";
 const state ={
     aim: {},
     aimnum:0,
-    books:[
-    ],
+    books:[],
     magazine:[],
     literature:[],
     science:[]
@@ -22,14 +21,14 @@ const actions = {
         let title = book.title;
         let image = book.image;
         let ISBN = book.ISBN;
-        let writer = book.writer;
+        let author = book.author;
         let price = book.price;
         let inventory = book.inventory;
         let tranch = book.tranch;
         let introduction = book.introduction;
         let bid = state.books.length;
         Axios.post('api/Book/changeInf',
-            {"title":title,"bid":bid,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
+            {"title":title,"bid":bid,"image":image,"ISBN":ISBN,"author":author,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
         ).then(() => {
             context.commit('changeInf',book)
@@ -39,14 +38,14 @@ const actions = {
         let title = book.title;
         let image = book.image;
         let ISBN = book.ISBN;
-        let writer = book.writer;
+        let author = book.author;
         let price = book.price;
         let inventory = book.inventory;
         let tranch = book.tranch;
         let introduction = book.introduction;
         Axios.post('api/Books/addBook',
             {
-                "title":title,"image":image,"ISBN":ISBN,"writer":writer,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
+                "title":title,"image":image,"ISBN":ISBN,"author":author,"price":price,"inventory":inventory,"tranch":tranch,"introduction":introduction
             }
         ).then(() => {
             context.commit('addBook',book)

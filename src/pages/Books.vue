@@ -16,26 +16,26 @@
                 <ul v-if="layout == 'grid'" class="grid">
                     <!-- 这种布局只显示缩略图片不显示文字 -->
                     <li v-for="(a,index) in books" :key="index">
-                        <img v-if="a.state" v-bind:src="a.image" alt="查看详情" @click="detail(a,index)"/>
+                        <img v-bind:src="a.image" alt="查看详情" @click="detail(a,index)"/>
                     </li>
                 </ul>
 
                 <ul v-if="layout == 'list'" class="list">
                     <!-- 这种布局显示小图片和文字 -->
                     <li v-for="(a,index) in books" :key="index">
-                        <div v-if="a.state" style="display: flex; justify-content: space-around" >
+                        <div style="display: flex; justify-content: space-around" >
                             <img v-bind:src="a.image" alt="查看详情" style="width: 194px;height: 200px" />
                             <div style="margin-top: 20px; width: 400px">
                                 <h3>{{a.title}}</h3>
                                 <h5>售价：  {{a.price}}  元</h5>
-                                <h5 @click="detail(a,index)">详情……</h5>
+                                <h5 @click="detail(a)">详情……</h5>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
             <div v-else>
-                <form   class="form-check " style="display: flex;flex-direction: column;justify-content: center;width:60%; margin-left: 150px">
+                <form   class="form-check " style="display: flex;flex-direction: column;justify-content: center;width:60%; margin-left: 150px; background-color: black">
                     <div class="input-group">
                         <label class="col-sm-2 control-label" for="title">书名</label>
                         <div class="col-md-10">
@@ -102,7 +102,7 @@
                 add_book: false,
                 Book:{
                     title:"",
-                    writer:"",
+                    author:"",
                     price:"",
                     inventory:"",
                     ISBN:"",

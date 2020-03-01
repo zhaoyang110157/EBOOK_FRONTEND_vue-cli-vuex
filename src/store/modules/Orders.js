@@ -20,6 +20,7 @@ const actions = {
 const mutations = {
     getOrders(state,res){
         state.orders = res.data;
+        console.log(res)
     },
     addOrder(state,carts){
         for(let i=0;i<carts.length ; i++){
