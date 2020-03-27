@@ -102,6 +102,16 @@
             this.$store.commit('Orders/setAccount',this.isLogin);
             this.$store.dispatch('Books/getBooks')
             this.$store.dispatch('Orders/getOrders');
+            var wsocket;
+            function connect() {
+                wsocket = new WebSocket("ws://localhost:8080/SE343_6_WebSocketSample_war/dukeetf");
+                wsocket.onmessage = onMessage;
+            }
+            function onMessage(evt) {
+                document.getElementById("price").innerHTML = evt.data;
+                //wsocket.send(data);
+            }
+            window.addEventListener("load", connect, false);
         },
         computed:{
             searchOrder() {

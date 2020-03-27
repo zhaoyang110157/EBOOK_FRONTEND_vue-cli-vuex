@@ -20,6 +20,7 @@
             </li>
         </ul>
         <button type="button"  @click="buy()" class="btn btn-outline-secondary" style="margin-left: 40%;margin-top: 50px ">提交订单</button>
+        <
     </div>
 
 </template>
