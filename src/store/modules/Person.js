@@ -4,10 +4,16 @@ const state ={
     isManager : false,
     isLogin :-1,
     user: null,
-    users: []
+    users: [],
+    visitor : 0
 };
 
 const actions = {
+    getNum(context){
+      Axios.get('api/Users/getNum').then((res)=>{
+          context.commit('getNum',res)
+      })
+    },
     getUsers(context){
         Axios.get('api/Users/getUsers')
             .then((res)=>{
@@ -32,6 +38,9 @@ const actions = {
 
 }
 const mutations = {
+    getNum(state,res){
+      state.visitor = res.data.visitor
+    },
     getUsers(state,res){
       state.users = res.data.users;
       console.log(res);

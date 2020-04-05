@@ -18,8 +18,15 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
     export default {
         name: "Home",
+        created(){
+            this.$store.dispatch('Users/getNum')
+        },
+            ...mapState({
+                visitor: state => state.Person.visitor
+            })
     }
 </script>
 
